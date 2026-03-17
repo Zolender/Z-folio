@@ -2,7 +2,7 @@ import { Facebook, Github, Instagram, Linkedin } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="w-full md:w-[80%] fixed bottom-0 md:left-[10%] border-t text-slate-400 border-t-slate-400 py-5 md:py-10 flex flex-col md:gap-0 gap-5 sm:flex-row justify-between items-center">
+        <footer className="w-full md:w-[90%] fixed bottom-0 md:left-[5%] border-t text-slate-400 border-t-slate-400 p-5 flex flex-col md:gap-0 gap-5 sm:flex-row justify-between items-center">
             <p>&copy; {new Date().getFullYear()} Eben-Ezer Ndeingar alias Zolender</p>
 
             <div className="flex w-fit items-center gap-4">
