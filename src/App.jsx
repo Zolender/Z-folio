@@ -9,10 +9,10 @@ import Footer from "./component/layout/Footer";
 
 function App(){
   return (
-    <div className="h-screen bg-linear-120 from-slate-900 to-slate-700">
+    <div className="h-full bg-slate-900">
       <Navbar/>
 
-      <main className="w-full px-2 sm:px-10">
+      <main className="w-full px-2 sm:px-10 flex flex-col justify-around gap-10 sm:gap-20">
         <Hero/>
         <Projects/>
         <Skills/>
