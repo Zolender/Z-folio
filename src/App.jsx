@@ -12,7 +12,7 @@ function App(){
     <div className="h-screen bg-linear-120 from-slate-900 to-slate-700">
       <Navbar/>
 
-      <main>
+      <main className="w-full px-2 sm:px-10">
         <Hero/>
         <Projects/>
         <Skills/>
