@@ -11,6 +11,7 @@ export default function ProjectCard({ project }: ProjectCardProps) {
 
   return (
     <div
+      role="button"
       onClick={() => navigate(`/projects/${project.slug}`)}
       className="cursor-pointer shrink-0 w-80 p-6 rounded-2xl border border-(--color-border) bg-(--color-surface) hover:border-(--color-accent) transition-colors"
     >

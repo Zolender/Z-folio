@@ -4,10 +4,9 @@ interface StackTagProps {
 }
 
 export default function StackTag({ label, variant = "supporting" }: StackTagProps) {
-  const borderColor =
-    variant === "core"
-      ? "border-(--color-accent)"
-      : "border-(--color-border)";
+  const borderColor = variant === "core"
+              ? "border-(--color-accent)"
+              : "border-(--color-border)"
 
   return (
     <span
