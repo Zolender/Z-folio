@@ -268,6 +268,8 @@ src/
 ├── pages/         one file per route
 ├── styles/        global CSS, Tailwind base, CSS variables
 └── types/         TypeScript interfaces and types
+└── routes/         holds the routing files
+
 ```
 
 **Key distinction:** `pages/` is what React Router renders at a route. `components/` is what pages are assembled from. They have different jobs and stay separate.
