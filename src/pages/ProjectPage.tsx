@@ -9,11 +9,11 @@ export default function ProjectPage() {
 
   if (!project) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center text-[var(--color-text-muted)]">
+      <div className="min-h-screen flex flex-col items-center justify-center text-(--color-text-muted)">
         <p className="mb-4">Project not found.</p>
         <button
           onClick={() => navigate("/")}
-          className="text-sm text-[var(--color-accent)] hover:underline"
+          className="text-sm text-(--color-accent) hover:underline"
         >
           Back home
         </button>
@@ -25,13 +25,13 @@ export default function ProjectPage() {
     <div className="max-w-3xl mx-auto px-6 py-32">
       <button
         onClick={() => navigate(-1)}
-        className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] mb-10 flex items-center gap-2 transition-colors"
+        className="text-sm text-(--color-text-muted) hover:text-(--color-text) mb-10 flex items-center gap-2 transition-colors"
       >
         ← Back
       </button>
 
-      <p className="text-sm text-[var(--color-text-muted)] mb-2">{project.name}</p>
-      <h1 className="text-4xl font-semibold text-[var(--color-text)] mb-4 leading-tight">
+      <p className="text-sm text-(--color-text-muted) mb-2">{project.name}</p>
+      <h1 className="text-4xl font-semibold text-(--color-text) mb-4 leading-tight">
         {project.oneLiner}
       </h1>
 
@@ -53,21 +53,21 @@ export default function ProjectPage() {
               key={i}
               src={src}
               alt={`${project.name} screenshot ${i + 1}`}
-              className="h-48 rounded-xl object-cover flex-shrink-0"
+              className="h-48 rounded-xl object-cover shrink-0"
             />
           ))}
         </div>
       )}
 
-      <div className="text-[var(--color-text-muted)] leading-relaxed whitespace-pre-line mb-10">
+      <div className="text-(--color-text-muted) leading-relaxed whitespace-pre-line mb-10">
         {project.description}
       </div>
 
-      <div className="p-6 rounded-2xl bg-[var(--color-surface)] border border-[var(--color-border)] mb-10">
-        <p className="text-xs text-[var(--color-text-muted)] uppercase tracking-widest mb-2">
+      <div className="p-6 rounded-2xl bg-(--color-surface) border border-(--color-border) mb-10">
+        <p className="text-xs text-(--color-text-muted) uppercase tracking-widest mb-2">
           What I learned
         </p>
-        <p className="text-[var(--color-text-muted)] leading-relaxed">
+        <p className="text-(--color-text-muted) leading-relaxed">
           {project.whatILearned}
         </p>
       </div>
@@ -77,7 +77,7 @@ export default function ProjectPage() {
           href={project.links.live}
           target="_blank"
           rel="noreferrer"
-          className="px-6 py-3 rounded-full bg-[var(--color-accent)] text-[var(--color-bg)] text-sm font-semibold hover:bg-[var(--color-accent-hover)] transition-colors"
+          className="px-6 py-3 rounded-full bg-(--color-accent) text-(--color-bg) text-sm font-semibold hover:bg-(--color-accent-hover) transition-colors"
         >
           Live site
         </a>
@@ -85,7 +85,7 @@ export default function ProjectPage() {
           href={project.links.github}
           target="_blank"
           rel="noreferrer"
-          className="px-6 py-3 rounded-full border border-[var(--color-border)] text-[var(--color-text-muted)] text-sm hover:border-[var(--color-accent)] hover:text-[var(--color-text)] transition-colors"
+          className="px-6 py-3 rounded-full border border-(--color-border) text-(--color-text-muted) text-sm hover:border-(--color-accent) hover:text-(--color-text) transition-colors"
         >
           GitHub
         </a>
