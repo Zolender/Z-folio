@@ -21,14 +21,11 @@ export default function Navbar() {
 
   return (
     <nav
-      className="fixed z-50 left-1/2 -translate-x-1/2 w-full flex items-center backdrop-blur-md border border-(--color-border) bg-(--color-surface)/90 transition-all duration-300 ease-in-out"
-      style={{
-        maxWidth: scrolled ? "22rem" : "100%",
-        top: scrolled ? "1.5rem" : "0",
-        borderRadius: scrolled ? "9999px" : "0",
-        padding: scrolled ? "0.25rem" : "1rem 2rem",
-        justifyContent: scrolled ? "center" : "space-between",
-      }}
+      className={`fixed z-50 left-1/2 -translate-x-1/2 w-full flex items-center backdrop-blur-md border border-(--color-border) bg-(--color-surface)/90 transition-all duration-300 ease-in-out ${
+        scrolled
+          ? "max-w-[22rem] top-6 rounded-full p-1 justify-center"
+          : "max-w-full top-0 rounded-none px-8 py-4 justify-between"
+      }`}
     >
       {!scrolled && (
         <Link
