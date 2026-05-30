@@ -23,10 +23,10 @@ export default function Navbar() {
     <nav
       className="fixed z-50 left-1/2 -translate-x-1/2 w-full flex items-center backdrop-blur-md border border-(--color-border) bg-(--color-surface)/90 transition-all duration-300 ease-in-out"
       style={{
-        maxWidth: scrolled ? "520px" : "100%",
-        top: scrolled ? "24px" : "0px",
-        borderRadius: scrolled ? "9999px" : "0px",
-        padding: scrolled ? "8px" : "16px 32px",
+        maxWidth: scrolled ? "22rem" : "100%",
+        top: scrolled ? "1.5rem" : "0",
+        borderRadius: scrolled ? "9999px" : "0",
+        padding: scrolled ? "0.25rem" : "1rem 2rem",
         justifyContent: scrolled ? "center" : "space-between",
       }}
     >
