@@ -1,5 +1,6 @@
 import { useState } from "react";
 import SectionWrapper from "../shared/SectionWrapper";
+import { contact } from "../../data/content";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -28,14 +29,8 @@ export default function Contact() {
 
   return (
     <SectionWrapper id="contact" className="max-w-4xl mx-auto">
-      <h2 className="text-2xl font-semibold text-[var(--color-text)] mb-4">
-        Contact
-      </h2>
-      <p className="text-[var(--color-text-muted)] mb-10 max-w-lg">
-        I'm open to opportunities, collaborations, or just a conversation about
-        something you're building. The best way to reach me is by email, but all
-        the links below work.
-      </p>
+      <h2 className="text-2xl font-semibold text-(--color-text) mb-4">Contact</h2>
+      <p className="text-(--color-text-muted) mb-10 max-w-lg">{contact.opening}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -45,7 +40,7 @@ export default function Contact() {
             onChange={handleChange}
             placeholder="Name"
             required
-            className="w-full px-4 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-(--color-surface) border border-(--color-border) text-(--color-text) placeholder:text-(--color-text-muted) focus:outline-none focus:border-(--color-accent) transition-colors"
           />
           <input
             name="email"
@@ -54,7 +49,7 @@ export default function Contact() {
             onChange={handleChange}
             placeholder="Email"
             required
-            className="w-full px-4 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors"
+            className="w-full px-4 py-3 rounded-xl bg-(--color-surface) border border-(--color-border) text-(--color-text) placeholder:text-(--color-text-muted) focus:outline-none focus:border-(--color-accent) transition-colors"
           />
           <textarea
             name="message"
@@ -63,33 +58,35 @@ export default function Contact() {
             placeholder="Message"
             required
             rows={5}
-            className="w-full px-4 py-3 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text)] placeholder:text-[var(--color-text-muted)] focus:outline-none focus:border-[var(--color-accent)] transition-colors resize-none"
+            className="w-full px-4 py-3 rounded-xl bg-(--color-surface) border border-(--color-border) text-(--color-text) placeholder:text-(--color-text-muted) focus:outline-none focus:border-(--color-accent) transition-colors resize-none"
           />
           <button
             type="submit"
             disabled={status === "sending"}
-            className="px-6 py-3 rounded-full bg-[var(--color-accent)] text-[var(--color-bg)] font-semibold text-sm hover:bg-[var(--color-accent-hover)] transition-colors disabled:opacity-60"
+            className="px-6 py-3 rounded-full bg-(--color-accent) text-(--color-bg) font-semibold text-sm hover:bg-(--color-accent-hover) transition-colors disabled:opacity-60"
           >
             {status === "sending" ? "Sending..." : "Send"}
           </button>
           {status === "sent" && (
-            <p className="text-sm text-[var(--color-accent)]">Message sent.</p>
+            <p className="text-sm text-(--color-accent)">Message sent.</p>
           )}
           {status === "error" && (
             <p className="text-sm text-red-400">Something went wrong. Try emailing directly.</p>
           )}
         </form>
 
-        <div className="flex flex-col gap-4 text-sm text-[var(--color-text-muted)]">
-          <a href="mailto:ndeingare@gmail.com" className="hover:text-[var(--color-text)] transition-colors">
-            ndeingare@gmail.com
-          </a>
-          <a href="https://linkedin.com/in/eben-ezer-ndeingar" target="_blank" rel="noreferrer" className="hover:text-[var(--color-text)] transition-colors">
-            LinkedIn
-          </a>
-          <a href="https://github.com/Zolender" target="_blank" rel="noreferrer" className="hover:text-[var(--color-text)] transition-colors">
-            GitHub
-          </a>
+        <div className="flex flex-col gap-4 text-sm text-(--color-text-muted)">
+          {contact.links.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              target={link.href.startsWith("mailto") ? undefined : "_blank"}
+              rel={link.href.startsWith("mailto") ? undefined : "noreferrer"}
+              className="hover:text-(--color-text) transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </SectionWrapper>
