@@ -2,7 +2,7 @@
 
 My personal portfolio, built the way I try to build everything else, intentionally. Not just something that works, but something I actually thought through before writing a single line.
 
-Live at [zolender.xyz](https://zolender.xyz/)
+**Status:** In development. Domain purchased at zolender.xyz, deployment pending.
 
 ---
 
@@ -14,12 +14,12 @@ A full-stack developer portfolio featuring the projects I have built while finis
 
 ## Tech stack
 
-|Layer|Tools|
+| Layer | Tools |
 |---|---|
-|Frontend|React 19, TypeScript, React Router v7, Tailwind CSS, Framer Motion|
-|Contact form|Resend API|
-|Deployment|Vercel|
-|Domain|Namecheap|
+| Frontend | React 19, TypeScript, React Router v7, Tailwind CSS v4, Framer Motion |
+| Contact form | Resend API |
+| Deployment | Vercel |
+| Domain | Namecheap — zolender.xyz |
 
 ---
 
@@ -40,13 +40,13 @@ Adding a new project means adding one typed object to `projects.ts`. Nothing els
 
 ---
 
-## Getting started
+## Running locally
 
 ```bash
 git clone https://github.com/Zolender/zolender-portfolio
 cd zolender-portfolio
 npm install
-cp .env.example .env
+cp .env.example .env   # add your Resend API key
 npm run dev
 ```
 
@@ -54,21 +54,18 @@ npm run dev
 
 ## Environment variables
 
-Create a `.env` file at the root with the following:
-
 ```
 VITE_RESEND_API_KEY=your_resend_api_key_here
 ```
 
-The Resend API key is used to deliver contact form submissions to my inbox. Nothing else is stored or sent anywhere.
+Used to deliver contact form submissions to the inbox. Nothing else is stored or sent anywhere.
 
 ---
 
 ## Author
 
-**Eben-Ezer Ndeingar** Full-Stack Developer in the Making, Kigali, Rwanda
+**Eben-Ezer Ndeingar** — Full-Stack Developer in the Making, Kigali, Rwanda
 
-- Portfolio: [zolender.xyz](https://zolender.xyz/)
 - GitHub: [github.com/Zolender](https://github.com/Zolender)
 - LinkedIn: [linkedin.com/in/eben-ezer-ndeingar](https://linkedin.com/in/eben-ezer-ndeingar)
 - Email: ndeingare@gmail.com
