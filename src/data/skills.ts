@@ -1,16 +1,19 @@
 export interface SkillGroup {
   category: string;
   tools: string[];
+  highlighted?: boolean;
 }
 
 export const skillGroups: SkillGroup[] = [
   {
     category: "Frontend",
     tools: ["React", "TypeScript", "Redux Toolkit", "React Router", "Tailwind CSS", "Framer Motion"],
+    highlighted: true,
   },
   {
     category: "Backend",
     tools: ["Node.js", "Express", "PostgreSQL", "Supabase", "JWT", "Bcrypt", "Zod"],
+    highlighted: true,
   },
   {
     category: "Tooling",

@@ -12,10 +12,16 @@ export default function Skills() {
         <div className="flex flex-col gap-8">
           {skillGroups.map((group) => (
             <div key={group.category}>
-              <p className="text-sm text-muted mb-3">{group.category}</p>
+              <p className="text-xs tracking-wide uppercase text-muted mb-4">
+                {group.category}
+              </p>
               <div className="flex flex-wrap gap-2">
                 {group.tools.map((tool) => (
-                  <StackTag key={tool} label={tool} />
+                  <StackTag
+                    key={tool}
+                    label={tool}
+                    variant={group.highlighted ? "core" : "supporting"}
+                  />
                 ))}
               </div>
             </div>
