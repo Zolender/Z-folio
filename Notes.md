@@ -1,12 +1,8 @@
 # Portfolio Build — Lecture Notes
 
-> These notes exist so you can explain every decision this project makes. Not just "what does this do" but "why does it work this way, and what would break if we did it differently."
-
----
 
 ## Session 1 — Structure (May 30, 2026)
 
----
 
 ### 1. Why we build structure before design
 
@@ -261,5 +257,3 @@ The form currently posts to `/api/contact` — this endpoint doesn't exist yet. 
 - **Screenshots:** Add per-project screenshots to `src/assets/screenshots/` when ready.
 
 ---
-
-_Notes maintained by your mentor throughout the build. Each session adds a new section._

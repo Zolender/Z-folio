@@ -75,7 +75,6 @@ Framer Motion. Every animation must have a job — if removing it wouldn't make 
 
 ## Group E — Deployment (pending)
 
-- [ ] Push to GitHub (`github.com/Zolender/zolender-portfolio`)
 - [ ] Connect repo to Vercel
 - [ ] Add environment variables in Vercel dashboard
 - [ ] Point `zolender.xyz` DNS (Namecheap) to Vercel — add CNAME record
@@ -90,11 +89,3 @@ Framer Motion. Every animation must have a job — if removing it wouldn't make 
 - [ ] Update `projects.ts` screenshot arrays once files are in place
 
 ---
-
-## Notes
-- No em dashes anywhere in the project. Commas, semicolons, or colons.
-- Never raw pixel values — use `rem` for layout/type, `vw`/`vh` for viewport-relative sizing.
-- Never inline `style` props when a Tailwind class can do it.
-- Inner content containers: `max-w-3xl mx-auto w-full` inside `SectionWrapper`.
-- React Router v7: import from `"react-router"`, not `"react-router-dom"`.
-- Navbar anchor links use `/#about` not `#about` — works from both home and project pages.
