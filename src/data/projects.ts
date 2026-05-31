@@ -7,7 +7,7 @@ export const projects: Project[] = [
     oneLiner:
       "A movie and series discovery app where users can search titles, explore details, save favorites, and pick up right where they left off, without losing their searches between sessions.",
     description:
-      "The interesting part isn't the search, it's the state. When a user leaves the search page and comes back, Redux keeps their results alive — no refetch, no blank slate. Framer Motion handles the transitions so the whole thing feels smooth rather than snappy.",
+      "The interesting part isn't the search, it's the state. When a user leaves the search page and comes back, Redux keeps their results alive: no refetch, no blank slate. Framer Motion handles the transitions so the whole thing feels smooth rather than snappy.",
     stack: [
       "React",
       "TypeScript",
@@ -19,7 +19,7 @@ export const projects: Project[] = [
     ],
     coreStack: ["React", "TypeScript", "Redux Toolkit"],
     whatILearned:
-      "How to think about state that outlives a component, and that good UX is often invisible — the user just feels like the app is on their side.",
+      "How to think about state that outlives a component, and that good UX is often invisible; the user just feels like the app is on their side.",
     links: {
       live: "https://movie-app-two-pi-45.vercel.app",
       github: "https://github.com/Zolender/MovieApp",
@@ -32,7 +32,7 @@ export const projects: Project[] = [
     oneLiner:
       "A full-stack blog platform built for writers who want a clean, honest space to publish, and readers who want something worth reading.",
     description:
-      "The first project I built with a proper frontend/backend separation — two separate folders, two separate deployments, one coherent system. JWT authentication with session rehydration on page load, role-based access enforced at the API level not just the UI, Zod for schema validation, Helmet and rate limiting for security. The architecture diagram and database schema are documented in the repo.\n\nUsers can write with markdown, like and comment on posts, and admins can manage the whole platform from a dedicated panel.",
+      "The first project I built with a proper frontend/backend separation: two separate folders, two separate deployments, one coherent system. JWT authentication with session rehydration on page load, role-based access enforced at the API level not just the UI, Zod for schema validation, Helmet and rate limiting for security. The architecture diagram and database schema are documented in the repo.\n\nUsers can write with markdown, like and comment on posts, and admins can manage the whole platform from a dedicated panel.",
     stack: [
       "React 19",
       "TypeScript",
