@@ -24,7 +24,12 @@ export const projects: Project[] = [
       live: "https://movie-app-two-pi-45.vercel.app",
       github: "https://github.com/Zolender/MovieApp",
     },
-    screenshots: [],
+    screenshots: [
+      "/screenshots/cinesearch/cinesearch-landing.png",
+      "/screenshots/cinesearch/SearchResult.png",
+      "/screenshots/cinesearch/cineSearch-movieDetails.png",
+      "/screenshots/cinesearch/cineSearch-favorites.png",
+    ],
   },
   {
     name: "Z-Tales",
@@ -82,7 +87,11 @@ export const projects: Project[] = [
       live: "https://agrihub-z.vercel.app",
       github: "https://github.com/Zolender/Agri-hub",
     },
-    screenshots: [],
+    screenshots: [
+      "/screenshots/agrihub/agrihub-dashboard.png",
+      "/screenshots/agrihub/agrihub-transactions.png",
+      "/screenshots/agrihub/agrihub-importData.png",
+    ],
   },
   {
     name: "Z-Book",
