@@ -1,14 +1,22 @@
 @import "tailwindcss";
 
-:root {
-  --color-bg: #181715;
+@theme {
+  --color-canvas: #181715;
   --color-surface: #22201c;
-  --color-surface-lift: #2c2923;
+  --color-raise: #2c2923;
   --color-accent: #b8936a;
-  --color-accent-hover: #8a6a48;
-  --color-text: #e2d5c3;
-  --color-text-muted: #9a8e80;
-  --color-border: #383430;
+  --color-accent-dim: #8a6a48;
+  --color-ink: #e2d5c3;
+  --color-muted: #9a8e80;
+  --color-edge: #383430;
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 @layer base {
@@ -23,8 +31,8 @@
   }
 
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
     font-family: "Inter", sans-serif;
     font-size: 1rem;
     line-height: 1.6;

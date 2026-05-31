@@ -6,26 +6,26 @@ export default function Hero() {
   return (
     <SectionWrapper className="min-h-screen flex flex-col justify-center">
       <div className="max-w-3xl mx-auto w-full">
-        <p className="text-xs tracking-widest uppercase text-(--color-text-muted) mb-6">
+        <p className="text-xs tracking-widest uppercase text-muted mb-6">
           {hero.tagline}
         </p>
-        <h1 className="text-6xl font-semibold tracking-tight text-(--color-text) leading-tight mb-8">
+        <h1 className="text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">
           {hero.name}
         </h1>
-        <p className="text-lg text-(--color-text-muted) max-w-xl leading-relaxed mb-10">
+        <p className="text-lg text-muted max-w-xl leading-relaxed mb-10">
           {hero.bio}
         </p>
         <div className="flex gap-4">
           <a
             href={hero.ctas.primary.href}
-            className="flex items-center gap-2 px-6 py-3 rounded-full bg-(--color-accent) text-(--color-bg) text-sm font-semibold hover:bg-(--color-accent-hover) transition-colors"
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-semibold hover:bg-accent-dim transition-colors"
           >
             {hero.ctas.primary.label}
             <ArrowRight className="w-3.5 h-3.5" />
           </a>
           <a
             href={hero.ctas.secondary.href}
-            className="px-6 py-3 rounded-full border border-(--color-border) text-(--color-text-muted) text-sm hover:text-(--color-text) hover:border-(--color-accent) transition-colors"
+            className="px-6 py-3 rounded-full border border-edge text-muted text-sm hover:text-ink hover:border-accent transition-colors"
           >
             {hero.ctas.secondary.label}
           </a>

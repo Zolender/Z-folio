@@ -7,7 +7,7 @@ export default function About() {
   return (
     <SectionWrapper id="about">
       <div className="max-w-3xl mx-auto w-full">
-        <p className="text-xs tracking-widest uppercase text-(--color-text-muted) mb-10">
+        <p className="text-xs tracking-widest uppercase text-muted mb-10">
           About
         </p>
         <div className="flex flex-col gap-6">
@@ -16,10 +16,10 @@ export default function About() {
               key={i}
               className={
                 i === 0
-                  ? "text-lg text-(--color-text-muted) leading-relaxed"
+                  ? "text-lg text-muted leading-relaxed"
                   : i === last
-                  ? "text-base font-semibold text-(--color-text) leading-relaxed"
-                  : "text-base text-(--color-text-muted) leading-relaxed"
+                  ? "text-base font-semibold text-ink leading-relaxed"
+                  : "text-base text-muted leading-relaxed"
               }
             >
               {p}
