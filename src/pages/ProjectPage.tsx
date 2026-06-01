@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { getProjectBySlug } from "../data/projects";
@@ -9,6 +9,8 @@ export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const project = getProjectBySlug(slug ?? "");
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
 
   if (!project) {
     return (
@@ -45,6 +47,10 @@ export default function ProjectPage() {
       animate="animate"
       exit="exit"
     >
+      <motion.div
+        className="fixed top-0 left-0 right-0 h-0.5 bg-accent origin-left z-60"
+        style={{ scaleX }}
+      />
     <div className="max-w-3xl mx-auto px-6 py-32">
       <button
         onClick={() => navigate(-1)}

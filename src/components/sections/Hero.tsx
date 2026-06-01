@@ -2,7 +2,45 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionWrapper from "../shared/SectionWrapper";
 import { useMotion } from "../../hooks/useMotion";
+import { useMagnetic } from "../../hooks/useMagnetic";
 import { hero } from "../../data/content";
+
+function MagneticLink({
+  href,
+  className,
+  children,
+  reduced,
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+  reduced: boolean | null;
+}) {
+  const { ref, x, y, onMouseMove, onMouseLeave } = useMagnetic(0.32);
+  const hasFinePointer =
+    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
+
+  if (reduced || !hasFinePointer) {
+    return (
+      <a href={href} className={className}>
+        {children}
+      </a>
+    );
+  }
+
+  return (
+    <motion.a
+      ref={ref as React.Ref<HTMLAnchorElement>}
+      href={href}
+      className={className}
+      style={{ x, y }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={onMouseLeave}
+    >
+      {children}
+    </motion.a>
+  );
+}
 
 export default function Hero() {
   const { reduced } = useMotion();
@@ -31,19 +69,21 @@ export default function Hero() {
             {hero.bio}
           </p>
           <div className="flex gap-4">
-            <a
+            <MagneticLink
               href={hero.ctas.primary.href}
               className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-semibold hover:bg-accent-dim transition-colors"
+              reduced={reduced}
             >
               {hero.ctas.primary.label}
               <ArrowRight className="w-3.5 h-3.5" />
-            </a>
-            <a
+            </MagneticLink>
+            <MagneticLink
               href={hero.ctas.secondary.href}
               className="px-6 py-3 rounded-full border border-edge text-muted text-sm hover:text-ink hover:border-accent transition-colors"
+              reduced={reduced}
             >
               {hero.ctas.secondary.label}
-            </a>
+            </MagneticLink>
           </div>
         </motion.div>
       </motion.div>

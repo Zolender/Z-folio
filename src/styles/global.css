@@ -19,6 +19,13 @@
   }
 }
 
+/* Hide OS cursor only on real pointer devices so our custom cursor takes over */
+@media (pointer: fine) {
+  *, *::before, *::after {
+    cursor: none !important;
+  }
+}
+
 @layer base {
   *,
   *::before,
