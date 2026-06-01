@@ -8,12 +8,13 @@ export default function Hero() {
   const { reduced } = useMotion();
   const { scrollY } = useScroll();
 
-  const y = useTransform(scrollY, [0, 500], reduced ? [0, 0] : [0, -60]);
-  const opacity = useTransform(scrollY, [200, 600], reduced ? [1, 1] : [1, 0]);
+  const y = useTransform(scrollY, [0, 600], reduced ? [0, 0] : [0, -120]);
+  const opacity = useTransform(scrollY, [0, 400], reduced ? [1, 1] : [1, 0]);
+  const scale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 0.92]);
 
   return (
     <SectionWrapper className="min-h-screen flex flex-col justify-center" noAnimation>
-      <motion.div style={{ y, opacity }}>
+      <motion.div style={{ y, opacity, scale }}>
         <motion.div
           className="max-w-3xl mx-auto w-full"
           initial={reduced ? false : { opacity: 0, y: 24 }}
