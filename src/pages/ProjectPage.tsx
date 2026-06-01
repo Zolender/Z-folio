@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useParams, useNavigate } from "react-router";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { getProjectBySlug } from "../data/projects";
@@ -23,7 +24,27 @@ export default function ProjectPage() {
     );
   }
 
+  const pageVariants = {
+    initial: { opacity: 0, scale: 0.98 },
+    animate: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.98,
+      transition: { duration: 0.2, ease: "easeIn" },
+    },
+  };
+
   return (
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
     <div className="max-w-3xl mx-auto px-6 py-32">
       <button
         onClick={() => navigate(-1)}
@@ -100,5 +121,6 @@ export default function ProjectPage() {
         </a>
       </div>
     </div>
+    </motion.div>
   );
 }

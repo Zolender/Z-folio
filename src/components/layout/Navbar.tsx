@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
 
 const links = [
@@ -27,11 +28,21 @@ export default function Navbar() {
           : "max-w-full top-0 rounded-none px-8 py-4 justify-between"
       }`}
     >
-      {!scrolled && (
-        <Link to="/" className="text-sm font-semibold text-ink shrink-0">
-          Eben-Ezer Ndeingar
-        </Link>
-      )}
+      <AnimatePresence>
+        {!scrolled && (
+          <motion.div
+            key="brand"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { duration: 0.2 } }}
+            exit={{ opacity: 0, transition: { duration: 0.15 } }}
+          >
+            <Link to="/" className="text-sm font-semibold text-ink shrink-0">
+              Eben-Ezer Ndeingar
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <div className="flex items-center gap-1">
         {links.map((link) => (
           <a

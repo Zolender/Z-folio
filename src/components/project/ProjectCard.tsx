@@ -1,7 +1,9 @@
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router";
 import type { Project } from "../../types";
 import StackTag from "../shared/StackTag";
+import { useMotion } from "../../hooks/useMotion";
 
 interface ProjectCardProps {
   project: Project;
@@ -9,12 +11,15 @@ interface ProjectCardProps {
 
 export default function ProjectCard({ project }: ProjectCardProps) {
   const navigate = useNavigate();
+  const { reduced } = useMotion();
 
   return (
-    <div
+    <motion.div
       role="button"
       onClick={() => navigate(`/projects/${project.slug}`)}
       className="cursor-pointer group shrink-0 w-80 flex flex-col justify-between gap-8 p-6 rounded-2xl border border-edge bg-surface hover:border-accent transition-colors"
+      whileHover={reduced ? {} : { y: -6, scale: 1.02 }}
+      transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
       <div className="flex flex-col gap-4">
         <h3 className="text-base font-semibold text-ink">{project.name}</h3>
@@ -31,6 +36,6 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           View project <ArrowRight className="w-3 h-3" />
         </span>
       </div>
-    </div>
+    </motion.div>
   );
 }
