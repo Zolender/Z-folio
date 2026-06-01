@@ -21,7 +21,7 @@ export default function SectionWrapper({
   const { makeVariant } = useMotion();
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "0px 0px -150px 0px" });
+  const isInView = useInView(ref, { margin: "0px 0px -80px 0px" });
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ export default function SectionWrapper({
 
   if (noAnimation) {
     return (
-      <section id={id} className={`w-full px-6 py-24 ${className}`}>
+      <section id={id} className={`w-full px-6 py-36 ${className}`}>
         {children}
       </section>
     );
@@ -45,7 +45,7 @@ export default function SectionWrapper({
     <motion.section
       ref={ref}
       id={id}
-      className={`w-full px-6 py-24 ${className}`}
+      className={`w-full px-6 py-36 ${className}`}
       initial="hidden"
       animate={controls}
       variants={makeVariant(from)}

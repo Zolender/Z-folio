@@ -12,17 +12,20 @@ export type FromDirection =
   | "bottom-right";
 
 function getOffsets(from: FromDirection): { x: number; y: number } {
-  const l = 70;
-  const d = 50;
+  const h = 180;
+  const v = 100;
+  const dx = 120;
+  const dy = 100;
+
   const map: Record<FromDirection, { x: number; y: number }> = {
-    right:         { x: l,  y: 0  },
-    left:          { x: -l, y: 0  },
-    bottom:        { x: 0,  y: l  },
-    top:           { x: 0,  y: -l },
-    "top-right":   { x: d,  y: -d },
-    "top-left":    { x: -d, y: -d },
-    "bottom-right":{ x: d,  y: d  },
-    "bottom-left": { x: -d, y: d  },
+    right:          { x: h,   y: 0  },
+    left:           { x: -h,  y: 0  },
+    bottom:         { x: 0,   y: v  },
+    top:            { x: 0,   y: -v },
+    "top-right":    { x: dx,  y: -dy },
+    "top-left":     { x: -dx, y: -dy },
+    "bottom-right": { x: dx,  y: dy  },
+    "bottom-left":  { x: -dx, y: dy  },
   };
   return map[from];
 }
@@ -34,17 +37,20 @@ export function useMotion() {
     const { x, y } = getOffsets(from);
     const hasY = y !== 0;
 
-    const hiddenTransition = { duration: 0.25, ease: "easeIn" as const };
-    const visibleTransition = { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const };
+    const hiddenTransition = { duration: 0.3, ease: "easeIn" as const };
+    const visibleTransition = {
+      duration: 0.75,
+      ease: [0.22, 1, 0.36, 1] as const,
+    };
 
     return {
       hidden: {
         opacity: 0,
         x: reduced ? 0 : x,
         y: reduced ? 0 : y,
-        scale: reduced ? 1 : 0.9,
-        rotateX: reduced ? 0 : hasY ? (y > 0 ? 5 : -5) : 0,
-        transformPerspective: 1000,
+        scale: reduced ? 1 : 0.80,
+        rotateX: reduced ? 0 : hasY ? (y > 0 ? 15 : -15) : 0,
+        transformPerspective: 1200,
         transition: hiddenTransition,
       },
       visible: {
@@ -59,9 +65,9 @@ export function useMotion() {
         opacity: 0,
         x: reduced ? 0 : -x,
         y: reduced ? 0 : -y,
-        scale: reduced ? 1 : 0.9,
-        rotateX: reduced ? 0 : hasY ? (y > 0 ? -5 : 5) : 0,
-        transformPerspective: 1000,
+        scale: reduced ? 1 : 0.80,
+        rotateX: reduced ? 0 : hasY ? (y > 0 ? -15 : 15) : 0,
+        transformPerspective: 1200,
         transition: hiddenTransition,
       },
     };
