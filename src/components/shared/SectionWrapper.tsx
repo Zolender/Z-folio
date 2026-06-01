@@ -1,15 +1,40 @@
+import { motion } from "framer-motion";
 import type { ReactNode } from "react";
+import { useMotion } from "../../hooks/useMotion";
 
 interface SectionWrapperProps {
   id?: string;
   children: ReactNode;
   className?: string;
+  noAnimation?: boolean;
 }
 
-export default function SectionWrapper({ id, children, className = "" }: SectionWrapperProps) {
+export default function SectionWrapper({
+  id,
+  children,
+  className = "",
+  noAnimation = false,
+}: SectionWrapperProps) {
+  const { fadeUp } = useMotion();
+
+  if (noAnimation) {
+    return (
+      <section id={id} className={`w-full px-6 py-24 ${className}`}>
+        {children}
+      </section>
+    );
+  }
+
   return (
-    <section id={id} className={`w-full px-6 py-24 ${className}`}>
+    <motion.section
+      id={id}
+      className={`w-full px-6 py-24 ${className}`}
+      variants={fadeUp}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
       {children}
-    </section>
+    </motion.section>
   );
 }
