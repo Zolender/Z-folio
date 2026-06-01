@@ -5,7 +5,7 @@ export default function About() {
   const last = about.paragraphs.length - 1;
 
   return (
-    <SectionWrapper id="about">
+    <SectionWrapper id="about" from="top-right">
       <div className="max-w-3xl mx-auto w-full">
         <p className="text-xs tracking-widest uppercase text-muted mb-10">
           About

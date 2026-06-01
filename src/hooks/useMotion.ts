@@ -1,17 +1,41 @@
 import { useReducedMotion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
-export type FromDirection = "bottom" | "top" | "left" | "right";
+export type FromDirection =
+  | "left"
+  | "right"
+  | "top"
+  | "bottom"
+  | "top-left"
+  | "top-right"
+  | "bottom-left"
+  | "bottom-right";
+
+function getOffsets(from: FromDirection): { x: number; y: number } {
+  const l = 70;
+  const d = 50;
+  const map: Record<FromDirection, { x: number; y: number }> = {
+    right:         { x: l,  y: 0  },
+    left:          { x: -l, y: 0  },
+    bottom:        { x: 0,  y: l  },
+    top:           { x: 0,  y: -l },
+    "top-right":   { x: d,  y: -d },
+    "top-left":    { x: -d, y: -d },
+    "bottom-right":{ x: d,  y: d  },
+    "bottom-left": { x: -d, y: d  },
+  };
+  return map[from];
+}
 
 export function useMotion() {
   const reduced = useReducedMotion();
 
   function makeVariant(from: FromDirection = "bottom"): Variants {
-    const isVertical = from === "bottom" || from === "top";
-    const offset = isVertical ? 50 : 80;
+    const { x, y } = getOffsets(from);
+    const hasY = y !== 0;
 
-    const x = from === "right" ? offset : from === "left" ? -offset : 0;
-    const y = from === "bottom" ? offset : from === "top" ? -offset : 0;
+    const hiddenTransition = { duration: 0.25, ease: "easeIn" as const };
+    const visibleTransition = { duration: 0.7, ease: [0.22, 1, 0.36, 1] as const };
 
     return {
       hidden: {
@@ -19,9 +43,9 @@ export function useMotion() {
         x: reduced ? 0 : x,
         y: reduced ? 0 : y,
         scale: reduced ? 1 : 0.9,
-        rotateX: reduced || !isVertical ? 0 : from === "bottom" ? 5 : -5,
+        rotateX: reduced ? 0 : hasY ? (y > 0 ? 5 : -5) : 0,
         transformPerspective: 1000,
-        transition: { duration: 0.25, ease: "easeIn" },
+        transition: hiddenTransition,
       },
       visible: {
         opacity: 1,
@@ -29,7 +53,16 @@ export function useMotion() {
         y: 0,
         scale: 1,
         rotateX: 0,
-        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+        transition: visibleTransition,
+      },
+      past: {
+        opacity: 0,
+        x: reduced ? 0 : -x,
+        y: reduced ? 0 : -y,
+        scale: reduced ? 1 : 0.9,
+        rotateX: reduced ? 0 : hasY ? (y > 0 ? -5 : 5) : 0,
+        transformPerspective: 1000,
+        transition: hiddenTransition,
       },
     };
   }
@@ -39,9 +72,7 @@ export function useMotion() {
   const stagger: Variants = {
     hidden: {},
     visible: {
-      transition: {
-        staggerChildren: reduced ? 0 : 0.05,
-      },
+      transition: { staggerChildren: reduced ? 0 : 0.05 },
     },
   };
 
