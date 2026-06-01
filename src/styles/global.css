@@ -28,6 +28,12 @@
 
   html {
     scroll-behavior: smooth;
+    scrollbar-width: none;
+    overflow-x: hidden;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
   }
 
   body {
