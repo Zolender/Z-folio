@@ -4,7 +4,7 @@ import { projects } from "../../data/projects";
 
 export default function Projects() {
   return (
-    <SectionWrapper id="projects">
+    <SectionWrapper id="projects" from="right">
       <div className="max-w-3xl mx-auto w-full mb-10">
         <p className="text-xs tracking-widest uppercase text-muted">
           Projects

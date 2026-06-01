@@ -4,7 +4,7 @@ import { skillGroups } from "../../data/skills";
 
 export default function Skills() {
   return (
-    <SectionWrapper id="skills">
+    <SectionWrapper id="skills" from="left">
       <div className="max-w-3xl mx-auto w-full">
         <p className="text-xs tracking-widest uppercase text-muted mb-10">
           Skills

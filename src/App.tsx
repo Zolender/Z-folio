@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router";
 import { AnimatePresence } from "framer-motion";
 import Layout from "./components/layout/Layout";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import Home from "./pages/Home";
 import ProjectPage from "./pages/ProjectPage";
 
@@ -20,6 +21,7 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Layout>
         <AnimatedRoutes />
       </Layout>
