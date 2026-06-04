@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-canvas: #0d0e14;
-  --color-surface: #13141e;
-  --color-raise: #1a1b28;
-  --color-accent: #7c6af7;
-  --color-accent-dim: #5b4de8;
-  --color-ink: #e2e4f0;
-  --color-muted: #737994;
-  --color-edge: #252639;
+  --color-canvas: #09090b;
+  --color-surface: #111116;
+  --color-raise: #1c1c22;
+  --color-accent: #8b5cf6;
+  --color-accent-dim: #7c3aed;
+  --color-ink: #f4f4f5;
+  --color-muted: #a1a1aa;
+  --color-edge: #27272a;
 }
 
 @utility scrollbar-hide {

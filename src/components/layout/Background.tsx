@@ -4,7 +4,7 @@ import { useMotion } from "../../hooks/useMotion";
 type Ripple = { x: number; y: number; radius: number; alpha: number };
 
 const SPACING = 48;
-const ACCENT = "124, 106, 247";
+const ACCENT = "139, 92, 246";
 const PROXIMITY_RADIUS = 180;
 const GLOW_RADIUS = 210;
 const RIPPLE_INTERVAL_MS = 80;
@@ -173,7 +173,7 @@ export default function Background() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(13,14,20,0.35) 65%, rgba(13,14,20,0.55) 100%)",
+                "linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(9,9,11,0.35) 65%, rgba(9,9,11,0.55) 100%)",
             }}
           />
         </>

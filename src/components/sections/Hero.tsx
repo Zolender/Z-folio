@@ -54,36 +54,51 @@ export default function Hero() {
     <SectionWrapper className="min-h-screen flex flex-col justify-center" noAnimation>
       <motion.div style={{ y, opacity, scale }}>
         <motion.div
-          className="max-w-3xl mx-auto w-full"
+          className="max-w-5xl mx-auto w-full grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
           initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.65, ease: "easeOut" }}
         >
-          <p className="text-xs tracking-widest uppercase text-muted mb-6">
-            {hero.tagline}
-          </p>
-          <h1 className="text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">
-            {hero.name}
-          </h1>
-          <p className="text-lg text-muted max-w-xl leading-relaxed mb-10">
-            {hero.bio}
-          </p>
-          <div className="flex gap-4">
-            <MagneticLink
-              href={hero.ctas.primary.href}
-              className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-semibold hover:bg-accent-dim transition-colors"
-              reduced={reduced}
-            >
-              {hero.ctas.primary.label}
-              <ArrowRight className="w-3.5 h-3.5" />
-            </MagneticLink>
-            <MagneticLink
-              href={hero.ctas.secondary.href}
-              className="px-6 py-3 rounded-full border border-edge text-muted text-sm hover:text-ink hover:border-accent transition-colors"
-              reduced={reduced}
-            >
-              {hero.ctas.secondary.label}
-            </MagneticLink>
+          {/* Text */}
+          <div>
+            <p className="text-xs tracking-widest uppercase text-muted mb-6">
+              {hero.tagline}
+            </p>
+            <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">
+              {hero.name}
+            </h1>
+            <p className="text-lg text-muted max-w-md leading-relaxed mb-10">
+              {hero.bio}
+            </p>
+            <div className="flex gap-4">
+              <MagneticLink
+                href={hero.ctas.primary.href}
+                className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-semibold hover:bg-accent-dim transition-colors"
+                reduced={reduced}
+              >
+                {hero.ctas.primary.label}
+                <ArrowRight className="w-3.5 h-3.5" />
+              </MagneticLink>
+              <MagneticLink
+                href={hero.ctas.secondary.href}
+                className="px-6 py-3 rounded-full border border-edge text-muted text-sm hover:text-ink hover:border-accent transition-colors"
+                reduced={reduced}
+              >
+                {hero.ctas.secondary.label}
+              </MagneticLink>
+            </div>
+          </div>
+
+          {/* Photo */}
+          <div className="flex justify-center md:justify-end order-first md:order-last">
+            <div className="relative">
+              <img
+                src="/me.jpg"
+                alt="Eben-Ezer Ndeingar"
+                className="w-56 h-72 md:w-64 md:h-80 object-cover object-top rounded-3xl ring-1 ring-accent/25"
+                style={{ boxShadow: "0 8px 48px rgba(139, 92, 246, 0.14)" }}
+              />
+            </div>
           </div>
         </motion.div>
       </motion.div>

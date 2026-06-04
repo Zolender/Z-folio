@@ -38,7 +38,7 @@ export default function Contact() {
   }
 
   return (
-    <SectionWrapper id="contact" from="bottom-right">
+    <SectionWrapper id="contact" from="right">
       <div className="max-w-3xl mx-auto w-full">
         <p className="text-xs tracking-widest uppercase text-muted mb-4">
           Contact
