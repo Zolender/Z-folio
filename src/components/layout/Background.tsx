@@ -16,10 +16,13 @@ export default function Background() {
 
   useEffect(() => {
     if (reduced) return;
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+    const rawCanvas = canvasRef.current;
+    if (!rawCanvas) return;
+    const canvas: HTMLCanvasElement = rawCanvas;
+
+    const rawCtx = canvas.getContext("2d");
+    if (!rawCtx) return;
+    const ctx: CanvasRenderingContext2D = rawCtx;
 
     let W = window.innerWidth;
     let H = window.innerHeight;
