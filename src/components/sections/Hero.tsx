@@ -91,13 +91,21 @@ export default function Hero() {
 
           {/* Photo */}
           <div className="flex justify-center md:justify-end order-first md:order-last">
-            <div className="relative">
+            <div
+              className="group relative w-56 h-72 md:w-64 md:h-80 rounded-3xl overflow-hidden ring-1 ring-accent/25 shrink-0"
+              style={{ boxShadow: "0 8px 48px rgba(139, 92, 246, 0.14)" }}
+            >
               <img
                 src="/me.jpg"
                 alt="Eben-Ezer Ndeingar"
-                className="w-56 h-72 md:w-64 md:h-80 object-cover object-top rounded-3xl ring-1 ring-accent/25"
-                style={{ boxShadow: "0 8px 48px rgba(139, 92, 246, 0.14)" }}
+                className="w-full h-full object-cover object-top"
               />
+              {/* Diagonal shine sweep on hover */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                <div className="absolute inset-0 -translate-x-full group-hover:translate-x-[250%] transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/12 to-transparent -skew-x-12" />
+              </div>
+              {/* Bottom fade — photo bleeds into background */}
+              <div className="absolute bottom-0 left-0 right-0 h-2/5 bg-gradient-to-t from-canvas/70 to-transparent pointer-events-none" />
             </div>
           </div>
         </motion.div>

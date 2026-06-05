@@ -55,7 +55,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Name"
               required
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-edge text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
             />
             <input
               name="email"
@@ -64,7 +64,7 @@ export default function Contact() {
               onChange={handleChange}
               placeholder="Email"
               required
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-edge text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
             />
             <textarea
               name="message"
@@ -73,7 +73,7 @@ export default function Contact() {
               placeholder="Message"
               required
               rows={5}
-              className="w-full px-4 py-3 rounded-xl bg-surface border border-edge text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors resize-none"
             />
             <button
               type="submit"

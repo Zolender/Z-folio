@@ -17,7 +17,8 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <motion.div
       role="button"
       onClick={() => navigate(`/projects/${project.slug}`)}
-      className="cursor-pointer group shrink-0 w-80 flex flex-col justify-between gap-8 p-6 rounded-2xl border border-edge bg-surface hover:border-accent transition-colors"
+      className="cursor-pointer group shrink-0 w-80 flex flex-col justify-between gap-8 p-6 rounded-2xl border border-white/6 bg-surface/70 backdrop-blur-sm hover:border-accent/50 transition-colors"
+      style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
       whileHover={reduced ? {} : { y: -6, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >

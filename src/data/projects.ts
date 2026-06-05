@@ -21,7 +21,7 @@ export const projects: Project[] = [
     whatILearned:
       "How to think about state that outlives a component, and that good UX is often invisible; the user just feels like the app is on their side.",
     links: {
-      live: "https://movie-app-two-pi-45.vercel.app",
+      live: "https://z-moviies.vercel.app",
       github: "https://github.com/Zolender/MovieApp",
     },
     screenshots: [
