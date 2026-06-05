@@ -101,7 +101,19 @@ export default function Hero() {
           >
             {/* Text */}
             <div>
-              <p className="text-xs tracking-widest uppercase text-muted mb-6">
+              {/* Mobile — newspaper byline: circular photo + tagline inline */}
+              <div className="flex items-center gap-3 mb-6 md:hidden">
+                <img
+                  src="/me.jpg"
+                  alt="Eben-Ezer Ndeingar"
+                  className="w-12 h-12 rounded-full object-cover object-top ring-1 ring-accent/25 shrink-0"
+                />
+                <p className="text-xs tracking-widest uppercase text-muted">
+                  {hero.tagline}
+                </p>
+              </div>
+              {/* Desktop — tagline alone */}
+              <p className="hidden md:block text-xs tracking-widest uppercase text-muted mb-6">
                 {hero.tagline}
               </p>
               <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">
@@ -129,9 +141,9 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Photo column */}
+            {/* Photo column — desktop only */}
             <motion.div
-              className="flex justify-center md:justify-end order-first md:order-last"
+              className="hidden md:flex justify-end"
               initial={reduced ? false : { opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
