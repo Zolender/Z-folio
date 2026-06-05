@@ -1,19 +1,37 @@
+import { motion } from "framer-motion";
 import SectionWrapper from "../shared/SectionWrapper";
+import { useMotion } from "../../hooks/useMotion";
 import { about } from "../../data/content";
 
 export default function About() {
+  const { reduced, fadeUp } = useMotion();
   const last = about.paragraphs.length - 1;
+
+  const paragraphStagger = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: reduced ? 0 : 0.09,
+        delayChildren: reduced ? 0 : 0.42,
+      },
+    },
+    past: {},
+  };
 
   return (
     <SectionWrapper id="about" from="left">
       <div className="max-w-3xl mx-auto w-full">
-        <p className="text-xs tracking-widest uppercase text-muted mb-10">
+        <motion.p
+          variants={fadeUp}
+          className="text-xs tracking-widest uppercase text-muted mb-10"
+        >
           About
-        </p>
-        <div className="flex flex-col gap-6">
+        </motion.p>
+        <motion.div variants={paragraphStagger} className="flex flex-col gap-6">
           {about.paragraphs.map((p, i) => (
-            <p
+            <motion.p
               key={i}
+              variants={fadeUp}
               className={
                 i === 0
                   ? "text-lg text-muted leading-relaxed"
@@ -23,9 +41,9 @@ export default function About() {
               }
             >
               {p}
-            </p>
+            </motion.p>
           ))}
-        </div>
+        </motion.div>
       </div>
     </SectionWrapper>
   );
