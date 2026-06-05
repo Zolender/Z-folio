@@ -11,8 +11,8 @@ export default function Skills() {
     hidden: {},
     visible: {
       transition: {
-        staggerChildren: reduced ? 0 : 0.11,
-        delayChildren: reduced ? 0 : 0.3,
+        staggerChildren: reduced ? 0 : 0.1,
+        delayChildren: reduced ? 0 : 0.38,
       },
     },
     past: {},
@@ -21,16 +21,40 @@ export default function Skills() {
   return (
     <SectionWrapper id="skills" from="left">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.p
+
+        {/* Heading block */}
+        <motion.h2
           variants={fadeUp}
-          className="text-xs tracking-widest uppercase text-muted mb-10"
+          className="text-4xl font-semibold tracking-tight text-ink mb-2"
         >
           Skills
+        </motion.h2>
+        <motion.p
+          variants={fadeUp}
+          className="text-sm text-muted mb-8 max-w-xs"
+        >
+          What I reach for, and what I&apos;m building on.
         </motion.p>
-        <motion.div variants={groupStagger} className="flex flex-col gap-8">
+
+        {/* Top rule */}
+        <motion.div
+          variants={fadeUp}
+          className="h-px bg-white/8 mb-0"
+        />
+
+        {/* Skill groups — definition-list style */}
+        <motion.div variants={groupStagger} className="flex flex-col">
           {skillGroups.map((group) => (
-            <motion.div key={group.category} variants={fadeUp}>
-              <p className="text-xs tracking-wide uppercase text-muted mb-4">
+            <motion.div
+              key={group.category}
+              variants={fadeUp}
+              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-3 py-6 border-b border-white/5 last:border-b-0"
+            >
+              <p
+                className={`text-sm font-medium mt-0.5 shrink-0 ${
+                  group.learning ? "text-muted/50 italic" : "text-muted"
+                }`}
+              >
                 {group.category}
               </p>
               <div className="flex flex-wrap gap-2">
@@ -38,13 +62,20 @@ export default function Skills() {
                   <StackTag
                     key={tool}
                     label={tool}
-                    variant={group.highlighted ? "core" : group.learning ? "learning" : "supporting"}
+                    variant={
+                      group.highlighted
+                        ? "core"
+                        : group.learning
+                        ? "learning"
+                        : "supporting"
+                    }
                   />
                 ))}
               </div>
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </SectionWrapper>
   );
