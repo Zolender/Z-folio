@@ -38,7 +38,7 @@ export default function Skills() {
                   <StackTag
                     key={tool}
                     label={tool}
-                    variant={group.highlighted ? "core" : "supporting"}
+                    variant={group.highlighted ? "core" : group.learning ? "learning" : "supporting"}
                   />
                 ))}
               </div>

@@ -2,6 +2,7 @@ export interface SkillGroup {
   category: string;
   tools: string[];
   highlighted?: boolean;
+  learning?: boolean;
 }
 
 export const skillGroups: SkillGroup[] = [
@@ -26,5 +27,6 @@ export const skillGroups: SkillGroup[] = [
   {
     category: "Currently deepening",
     tools: ["MongoDB", "WebSockets", "Socket.io"],
+    learning: true,
   },
 ];

@@ -1,16 +1,24 @@
+import { motion } from "framer-motion";
+
 interface StackTagProps {
   label: string;
-  variant?: "core" | "supporting";
+  variant?: "core" | "supporting" | "learning";
 }
 
 export default function StackTag({ label, variant = "supporting" }: StackTagProps) {
   return (
-    <span
-      className={`inline-block px-3 py-1 text-sm rounded-full border text-muted ${
-        variant === "core" ? "border-accent" : "border-edge"
+    <motion.span
+      whileHover={{ scale: 1.06 }}
+      transition={{ type: "spring", stiffness: 400, damping: 22 }}
+      className={`inline-block px-3.5 py-1.5 text-sm rounded-full border transition-colors select-none ${
+        variant === "core"
+          ? "bg-accent/12 border-accent/45 text-accent"
+          : variant === "learning"
+          ? "bg-surface/50 border-white/6 text-muted/70 italic"
+          : "bg-surface/50 border-white/8 text-muted hover:text-ink hover:border-accent/35"
       }`}
     >
       {label}
-    </span>
+    </motion.span>
   );
 }

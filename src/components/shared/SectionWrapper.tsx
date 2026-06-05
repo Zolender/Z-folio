@@ -21,7 +21,7 @@ export default function SectionWrapper({
   const { makeVariant } = useMotion();
   const controls = useAnimation();
   const ref = useRef(null);
-  const isInView = useInView(ref, { margin: "0px 0px -80px 0px" });
+  const isInView = useInView(ref, { margin: "0px 0px -120px 0px" });
   const [hasBeenVisible, setHasBeenVisible] = useState(false);
 
   useEffect(() => {

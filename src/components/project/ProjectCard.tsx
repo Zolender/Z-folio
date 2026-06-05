@@ -7,9 +7,10 @@ import { useMotion } from "../../hooks/useMotion";
 
 interface ProjectCardProps {
   project: Project;
+  className?: string;
 }
 
-export default function ProjectCard({ project }: ProjectCardProps) {
+export default function ProjectCard({ project, className = "w-90 shrink-0" }: ProjectCardProps) {
   const navigate = useNavigate();
   const { reduced } = useMotion();
 
@@ -17,13 +18,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
     <motion.div
       role="button"
       onClick={() => navigate(`/projects/${project.slug}`)}
-      className="cursor-pointer group shrink-0 w-80 flex flex-col justify-between gap-8 p-6 rounded-2xl border border-white/6 bg-surface/70 backdrop-blur-sm hover:border-accent/50 transition-colors"
+      className={`cursor-pointer group flex flex-col justify-between gap-10 p-7 rounded-2xl border border-white/6 bg-surface/70 backdrop-blur-sm hover:border-accent/50 transition-colors ${className}`}
       style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.04)" }}
       whileHover={reduced ? {} : { y: -6, scale: 1.02 }}
       transition={{ type: "spring", stiffness: 400, damping: 25 }}
     >
+      {/* Chrome accent line at top */}
+      <div className="-mx-7 -mt-7 mb-2 h-px bg-linear-to-r from-transparent via-accent/30 to-transparent" />
+
       <div className="flex flex-col gap-4">
-        <h3 className="text-base font-semibold text-ink">{project.name}</h3>
+        <h3 className="text-lg font-semibold text-ink">{project.name}</h3>
         <p className="text-sm text-muted leading-relaxed">{project.oneLiner}</p>
       </div>
 
