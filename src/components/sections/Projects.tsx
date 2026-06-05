@@ -42,12 +42,15 @@ export default function Projects() {
 
   return (
     <SectionWrapper id="projects" from="right">
-      <motion.p
-        variants={fadeUp}
-        className="max-w-3xl mx-auto w-full mb-10 text-xs tracking-widest uppercase text-muted"
-      >
-        Projects
-      </motion.p>
+      <div className="max-w-3xl mx-auto w-full">
+        <motion.h2
+          variants={fadeUp}
+          className="text-4xl font-semibold tracking-tight text-ink mb-3"
+        >
+          Projects
+        </motion.h2>
+        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-10" />
+      </div>
 
       {/* Desktop / tablet — infinite horizontal carousel */}
       <div className="relative hidden md:block">

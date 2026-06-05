@@ -101,19 +101,8 @@ export default function Hero() {
           >
             {/* Text */}
             <div>
-              {/* Mobile — newspaper byline: circular photo + tagline inline */}
-              <div className="flex items-center gap-3 mb-6 md:hidden">
-                <img
-                  src="/me.jpg"
-                  alt="Eben-Ezer Ndeingar"
-                  className="w-12 h-12 rounded-full object-cover object-top ring-1 ring-accent/25 shrink-0"
-                />
-                <p className="text-xs tracking-widest uppercase text-muted">
-                  {hero.tagline}
-                </p>
-              </div>
-              {/* Desktop — tagline alone */}
-              <p className="hidden md:block text-xs tracking-widest uppercase text-muted mb-6">
+              {/* Tagline — desktop shows alone, mobile shows without photo */}
+              <p className="text-xs tracking-widest uppercase text-muted mb-6">
                 {hero.tagline}
               </p>
               <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">

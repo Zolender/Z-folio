@@ -21,12 +21,13 @@ export default function About() {
   return (
     <SectionWrapper id="about" from="left">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.p
+        <motion.h2
           variants={fadeUp}
-          className="text-xs tracking-widest uppercase text-muted mb-10"
+          className="text-4xl font-semibold tracking-tight text-ink mb-3"
         >
           About
-        </motion.p>
+        </motion.h2>
+        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-10" />
         <motion.div variants={paragraphStagger} className="flex flex-col gap-6">
           {about.paragraphs.map((p, i) => (
             <motion.p

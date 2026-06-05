@@ -65,18 +65,19 @@ export default function Contact() {
   return (
     <SectionWrapper id="contact" from="right">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.p
+        <motion.h2
           variants={fadeUp}
-          className="text-xs tracking-widest uppercase text-muted mb-4"
+          className="text-4xl font-semibold tracking-tight text-ink mb-3"
         >
           Contact
-        </motion.p>
+        </motion.h2>
         <motion.p
           variants={fadeUp}
-          className="text-muted mb-10 max-w-lg leading-relaxed"
+          className="text-sm text-muted mb-8 max-w-md leading-relaxed"
         >
           {contact.opening}
         </motion.p>
+        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
