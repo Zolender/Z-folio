@@ -130,7 +130,12 @@ export default function Hero() {
             </div>
 
             {/* Photo column */}
-            <div className="flex justify-center md:justify-end order-first md:order-last">
+            <motion.div
+              className="flex justify-center md:justify-end order-first md:order-last"
+              initial={reduced ? false : { opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] }}
+            >
               <div className="relative">
 
                 {/* Accent glow — light source behind the photo */}
@@ -178,7 +183,7 @@ export default function Hero() {
 
                 {/* Photo card */}
                 <div
-                  className="group relative w-56 h-72 md:w-64 md:h-80 rounded-3xl overflow-hidden ring-1 ring-accent/25 shrink-0"
+                  className="group relative w-44 h-56 md:w-64 md:h-80 rounded-3xl overflow-hidden ring-1 ring-accent/25 shrink-0"
                   style={{ boxShadow: "0 8px 48px rgba(139,92,246,0.14)" }}
                 >
                   <img
@@ -195,7 +200,7 @@ export default function Hero() {
                 </div>
 
               </div>
-            </div>
+            </motion.div>
 
           </motion.div>
         </motion.div>
