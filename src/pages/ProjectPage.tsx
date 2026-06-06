@@ -53,7 +53,7 @@ export default function ProjectPage() {
       />
     <div className="max-w-3xl mx-auto px-6 py-32">
       <button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate("/", { state: { scrollTo: "projects" } })}
         className="flex items-center gap-2 text-sm text-muted hover:text-ink mb-12 transition-colors"
       >
         <ArrowLeft className="w-3.5 h-3.5" />

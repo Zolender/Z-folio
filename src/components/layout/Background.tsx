@@ -131,12 +131,21 @@ export default function Background() {
       mouse.active = false;
     }
 
+    // Debounce resize and ignore keyboard-triggered height-only shrinks (mobile)
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
     function onResize() {
-      W = window.innerWidth;
-      H = window.innerHeight;
-      canvas.width = W;
-      canvas.height = H;
-      dots = buildDots();
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const newW = window.innerWidth;
+        const newH = window.innerHeight;
+        // Skip if only the height shrank (soft keyboard appeared on mobile)
+        if (newW === W && newH < H * 0.8) return;
+        W = newW;
+        H = newH;
+        canvas.width = W;
+        canvas.height = H;
+        dots = buildDots();
+      }, 150);
     }
 
     window.addEventListener("mousemove", onMove);
@@ -147,6 +156,7 @@ export default function Background() {
 
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(resizeTimer);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
       window.removeEventListener("touchmove", onTouch);
