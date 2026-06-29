@@ -12,9 +12,16 @@ const MAX_RIPPLES = 10;
 
 export default function Background() {
   const { reduced } = useMotion();
-  const { theme } = useTheme();
+  const { theme, effectiveMode } = useTheme();
   const ACCENT = theme.rgb;
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  // The vignette fades content toward the canvas color — flip it per mode so
+  // light pages don't get darkened by a black gradient.
+  const vignette =
+    effectiveMode === "light"
+      ? "linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(247,247,249,0.4) 65%, rgba(247,247,249,0.7) 100%)"
+      : "linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(9,9,11,0.35) 65%, rgba(9,9,11,0.55) 100%)";
 
   useEffect(() => {
     if (reduced) return;
@@ -181,13 +188,7 @@ export default function Background() {
         <>
           <canvas ref={canvasRef} className="absolute inset-0" style={{ display: "block" }} />
           {/* Vignette: full visibility at top (hero), dims toward content sections */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, transparent 25%, rgba(9,9,11,0.35) 65%, rgba(9,9,11,0.55) 100%)",
-            }}
-          />
+          <div className="absolute inset-0" style={{ background: vignette }} />
         </>
       )}
     </div>

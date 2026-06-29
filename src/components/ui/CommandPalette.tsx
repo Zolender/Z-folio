@@ -12,6 +12,9 @@ import {
   Copy,
   Check,
   CornerDownLeft,
+  Sun,
+  Moon,
+  Monitor,
 } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../shared/BrandIcons";
 import { useCommand } from "../providers/CommandProvider";
@@ -39,7 +42,7 @@ const LINKEDIN = "https://linkedin.com/in/eben-ezer-ndeingar";
 
 export default function CommandPalette() {
   const { isOpen, close } = useCommand();
-  const { themes, themeId, setThemeId } = useTheme();
+  const { themes, themeId, setThemeId, mode, setMode } = useTheme();
   const { reduced } = useMotion();
   const navigate = useNavigate();
   const location = useLocation();
@@ -113,6 +116,12 @@ export default function CommandPalette() {
       perform: () => setThemeId(t.id),
     }));
 
+    const appearance: Command[] = [
+      { id: "mode-system", label: "Match system", group: "Appearance", icon: Monitor, keywords: "auto theme mode os default", active: mode === "system", keepOpen: true, perform: () => setMode("system") },
+      { id: "mode-light", label: "Light mode", group: "Appearance", icon: Sun, keywords: "bright day theme mode", active: mode === "light", keepOpen: true, perform: () => setMode("light") },
+      { id: "mode-dark", label: "Dark mode", group: "Appearance", icon: Moon, keywords: "night dark theme mode", active: mode === "dark", keepOpen: true, perform: () => setMode("dark") },
+    ];
+
     const connect: Command[] = [
       { id: "copy-email", label: "Copy email address", group: "Connect", icon: Copy, keywords: "clipboard mail", keepOpen: true, perform: copyEmail },
       { id: "email", label: "Send an email", group: "Connect", icon: Mail, keywords: "mailto contact write", perform: () => { window.location.href = `mailto:${EMAIL}`; } },
@@ -120,9 +129,9 @@ export default function CommandPalette() {
       { id: "linkedin", label: "LinkedIn profile", group: "Connect", icon: LinkedinIcon, keywords: "social network career", perform: () => window.open(LINKEDIN, "_blank", "noopener") },
     ];
 
-    return [...nav, ...projectCmds, ...themeCmds, ...connect];
+    return [...nav, ...projectCmds, ...themeCmds, ...appearance, ...connect];
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [themes, themeId, location.pathname]);
+  }, [themes, themeId, mode, location.pathname]);
 
   // Filter by label + keywords (case-insensitive substring).
   const filtered = useMemo(() => {

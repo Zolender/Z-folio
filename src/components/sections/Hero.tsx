@@ -114,7 +114,7 @@ export default function Hero() {
               <div className="flex gap-4 flex-wrap">
                 <MagneticLink
                   href={hero.ctas.primary.href}
-                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-canvas text-sm font-semibold hover:bg-accent-dim transition-colors"
+                  className="flex items-center gap-2 px-6 py-3 rounded-full bg-accent text-on-accent text-sm font-semibold hover:bg-accent-dim transition-colors"
                   reduced={reduced}
                 >
                   {hero.ctas.primary.label}

@@ -121,3 +121,16 @@ export const projects: Project[] = [
 export function getProjectBySlug(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
+
+// Index + wrap-around neighbours for prev/next navigation on the detail page.
+export function getProjectNavigation(slug: string) {
+  const index = projects.findIndex((p) => p.slug === slug);
+  if (index === -1) return null;
+  const total = projects.length;
+  return {
+    index,
+    total,
+    prev: projects[(index - 1 + total) % total],
+    next: projects[(index + 1) % total],
+  };
+}

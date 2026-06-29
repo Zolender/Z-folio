@@ -9,10 +9,26 @@
   --color-ink: #f4f4f5;
   --color-muted: #a1a1aa;
   --color-edge: #27272a;
+  /* Text that sits on an accent fill (buttons). Fixed dark in both modes —
+     every accent is bright enough that dark text reads on it. This is what
+     replaced `text-canvas` on buttons, which broke when canvas flipped light. */
+  --color-on-accent: #0a0a0c;
   /* "r, g, b" form of the accent — the canvas builds rgba() strings from it.
      ThemeProvider overrides this (plus --color-accent / --color-accent-dim)
      at runtime when a different accent is chosen. */
   --accent-rgb: 139, 92, 246;
+}
+
+/* Light mode — ThemeProvider sets data-mode="light" on <html>.
+   The attribute selector outranks :root so these win at runtime. Accent
+   tokens are intentionally left alone (managed per-theme by ThemeProvider). */
+html[data-mode="light"] {
+  --color-canvas: #f7f7f9;
+  --color-surface: #ffffff;
+  --color-raise: #eef0f2;
+  --color-ink: #18181b;
+  --color-muted: #52525b;
+  --color-edge: #d4d4d8;
 }
 
 @utility scrollbar-hide {

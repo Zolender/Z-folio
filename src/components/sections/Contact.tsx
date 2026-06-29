@@ -118,7 +118,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "sending"}
-                  className="w-full px-6 py-3 rounded-full bg-accent text-canvas font-semibold text-sm hover:bg-accent-dim transition-colors disabled:opacity-60"
+                  className="w-full px-6 py-3 rounded-full bg-accent text-on-accent font-semibold text-sm hover:bg-accent-dim transition-colors disabled:opacity-60"
                 >
                   {status === "sending" ? "Sending..." : "Send"}
                 </button>
