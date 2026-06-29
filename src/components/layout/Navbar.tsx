@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router";
-import { Menu, X, Command } from "lucide-react";
+import { Menu, X, Search } from "lucide-react";
 import { useCommand } from "../providers/CommandProvider";
 import { useMotion } from "../../hooks/useMotion";
 
 const isMac =
   typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
+
+// OS-correct key caps so Windows users don't see a misleading ⌘ symbol.
+const shortcutKeys = isMac ? ["⌘", "K"] : ["Ctrl", "K"];
 
 const links = [
   { label: "About", href: "/#about" },
@@ -68,7 +71,7 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed z-50 w-full flex items-center backdrop-blur-md border border-white/8 bg-surface/80 transition-all duration-300 ease-in-out ${
+        className={`fixed z-50 w-full flex items-center backdrop-blur-md border border-line bg-surface/80 elevate transition-all duration-300 ease-in-out ${
           scrolled
             ? "right-4 md:right-auto md:left-1/2 md:-translate-x-1/2 max-w-14 md:max-w-88 top-6 rounded-full p-1 justify-center"
             : "left-1/2 -translate-x-1/2 max-w-full top-0 rounded-none px-6 md:px-8 py-4 justify-between"
@@ -117,17 +120,26 @@ export default function Navbar() {
               </a>
             );
           })}
-          {/* Command palette trigger — icon always, shortcut hint in the full bar */}
+          {/* Command palette trigger — a search affordance with real key caps,
+              so the shortcut is discoverable and OS-correct. */}
           <button
             onClick={openCommand}
-            aria-label="Open command palette"
-            className="ml-1 flex items-center gap-1.5 pl-3 pr-2.5 py-1.5 rounded-full text-sm text-muted hover:text-ink hover:bg-raise transition-colors"
+            aria-label={`Open command palette (${shortcutKeys.join(" ")})`}
+            title={`Commands & search — ${shortcutKeys.join(" ")}`}
+            className="ml-1 flex items-center gap-2 rounded-full border border-edge pl-3 pr-2 py-1.5 text-sm text-muted hover:text-ink hover:border-accent/40 transition-colors"
           >
-            <Command className="w-3.5 h-3.5" />
+            <Search className="w-3.5 h-3.5" />
             {!scrolled && (
-              <kbd className="text-[10px] font-medium tracking-wide">
-                {isMac ? "⌘K" : "Ctrl K"}
-              </kbd>
+              <span className="flex items-center gap-1">
+                {shortcutKeys.map((k) => (
+                  <kbd
+                    key={k}
+                    className="rounded bg-raise px-1.5 py-0.5 text-[10px] font-medium leading-none text-muted"
+                  >
+                    {k}
+                  </kbd>
+                ))}
+              </span>
             )}
           </button>
         </div>
@@ -198,9 +210,9 @@ export default function Navbar() {
                   setMenuOpen(false);
                   openCommand();
                 }}
-                className="mt-1 flex w-full items-center gap-2.5 px-4 py-3 rounded-xl text-sm text-muted hover:text-ink hover:bg-raise transition-colors border-t border-white/5"
+                className="mt-1 flex w-full items-center gap-2.5 px-4 py-3 rounded-xl text-sm text-muted hover:text-ink hover:bg-raise transition-colors border-t border-line-soft"
               >
-                <Command className="w-4 h-4" />
+                <Search className="w-4 h-4" />
                 Commands & search
               </button>
             </motion.div>

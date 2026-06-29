@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Command, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { useCommand } from "../providers/CommandProvider";
 import { useMotion } from "../../hooks/useMotion";
 
@@ -60,7 +60,7 @@ export default function CommandHint() {
         >
           <div className="flex items-center gap-3 rounded-2xl border border-edge bg-surface/95 backdrop-blur-md px-4 py-3 shadow-2xl shadow-black/40">
             <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-              <Command className="h-4 w-4" />
+              <Search className="h-4 w-4" />
             </span>
             <button onClick={tryIt} className="text-left">
               <p className="text-sm text-ink leading-tight">
