@@ -9,6 +9,10 @@
   --color-ink: #f4f4f5;
   --color-muted: #a1a1aa;
   --color-edge: #27272a;
+  /* "r, g, b" form of the accent — the canvas builds rgba() strings from it.
+     ThemeProvider overrides this (plus --color-accent / --color-accent-dim)
+     at runtime when a different accent is chosen. */
+  --accent-rgb: 139, 92, 246;
 }
 
 @utility scrollbar-hide {

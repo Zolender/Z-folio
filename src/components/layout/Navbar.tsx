@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Command } from "lucide-react";
+import { useCommand } from "../providers/CommandProvider";
+
+const isMac =
+  typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
 
 const links = [
   { label: "About", href: "/#about" },
@@ -13,6 +17,7 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { open: openCommand } = useCommand();
 
   useEffect(() => {
     function onScroll() {
@@ -64,6 +69,19 @@ export default function Navbar() {
               {link.label}
             </a>
           ))}
+          {/* Command palette trigger — icon always, shortcut hint in the full bar */}
+          <button
+            onClick={openCommand}
+            aria-label="Open command palette"
+            className="ml-1 flex items-center gap-1.5 pl-3 pr-2.5 py-1.5 rounded-full text-sm text-muted hover:text-ink hover:bg-raise transition-colors"
+          >
+            <Command className="w-3.5 h-3.5" />
+            {!scrolled && (
+              <kbd className="text-[10px] font-medium tracking-wide">
+                {isMac ? "⌘K" : "Ctrl K"}
+              </kbd>
+            )}
+          </button>
         </div>
 
         <button
@@ -111,6 +129,17 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+              {/* Command palette — works great as a touch navigator too */}
+              <button
+                onClick={() => {
+                  setMenuOpen(false);
+                  openCommand();
+                }}
+                className="mt-1 flex w-full items-center gap-2.5 px-4 py-3 rounded-xl text-sm text-muted hover:text-ink hover:bg-raise transition-colors border-t border-white/5"
+              >
+                <Command className="w-4 h-4" />
+                Commands & search
+              </button>
             </motion.div>
           </>
         )}

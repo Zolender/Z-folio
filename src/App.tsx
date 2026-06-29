@@ -3,6 +3,9 @@ import { AnimatePresence } from "framer-motion";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Cursor from "./components/ui/Cursor";
+import CommandPalette from "./components/ui/CommandPalette";
+import { ThemeProvider } from "./components/providers/ThemeProvider";
+import { CommandProvider } from "./components/providers/CommandProvider";
 import Home from "./pages/Home";
 import ProjectPage from "./pages/ProjectPage";
 
@@ -22,11 +25,16 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <BrowserRouter>
-      <Cursor />
-      <ScrollToTop />
-      <Layout>
-        <AnimatedRoutes />
-      </Layout>
+      <ThemeProvider>
+        <CommandProvider>
+          <Cursor />
+          <ScrollToTop />
+          <Layout>
+            <AnimatedRoutes />
+          </Layout>
+          <CommandPalette />
+        </CommandProvider>
+      </ThemeProvider>
     </BrowserRouter>
   );
 }

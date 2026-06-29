@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 import { useMotion } from "../../hooks/useMotion";
+import { useTheme } from "../providers/ThemeProvider";
 
 type Ripple = { x: number; y: number; radius: number; alpha: number };
 
 const SPACING = 48;
-const ACCENT = "139, 92, 246";
 const PROXIMITY_RADIUS = 180;
 const GLOW_RADIUS = 210;
 const RIPPLE_INTERVAL_MS = 80;
@@ -12,6 +12,8 @@ const MAX_RIPPLES = 10;
 
 export default function Background() {
   const { reduced } = useMotion();
+  const { theme } = useTheme();
+  const ACCENT = theme.rgb;
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -163,7 +165,7 @@ export default function Background() {
       window.removeEventListener("touchend", onTouchEnd);
       window.removeEventListener("resize", onResize);
     };
-  }, [reduced]);
+  }, [reduced, ACCENT]);
 
   return (
     <div className="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
