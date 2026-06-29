@@ -275,7 +275,7 @@ export default function CommandPalette() {
                           aria-selected={isActive}
                           onMouseMove={() => setActive(index)}
                           onClick={() => run(cmd)}
-                          className={`mx-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
+                          className={`mx-2 flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors ${
                             isActive ? "bg-accent/15 text-ink" : "text-muted"
                           }`}
                         >
@@ -308,10 +308,13 @@ export default function CommandPalette() {
                   <Check className="w-3 h-3" /> {feedback}
                 </span>
               ) : (
-                <span className="flex items-center gap-3">
-                  <span className="flex items-center gap-1"><kbd className="border border-edge rounded px-1">↑</kbd><kbd className="border border-edge rounded px-1">↓</kbd> navigate</span>
-                  <span className="flex items-center gap-1"><kbd className="border border-edge rounded px-1">↵</kbd> select</span>
-                </span>
+                <>
+                  <span className="hidden sm:flex items-center gap-3">
+                    <span className="flex items-center gap-1"><kbd className="border border-edge rounded px-1">↑</kbd><kbd className="border border-edge rounded px-1">↓</kbd> navigate</span>
+                    <span className="flex items-center gap-1"><kbd className="border border-edge rounded px-1">↵</kbd> select</span>
+                  </span>
+                  <span className="sm:hidden text-muted/70">Tap a command</span>
+                </>
               )}
               <span className="hidden sm:flex items-center gap-1.5 text-muted/70">
                 <Palette className="w-3 h-3" /> live theme

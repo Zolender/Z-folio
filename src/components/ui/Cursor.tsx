@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useMotion } from "../../hooks/useMotion";
 
-const INTERACTIVE = "a, button, [role='button'], label, [data-cursor]";
+const INTERACTIVE = "a, button, [role='button'], [role='option'], label, [data-cursor]";
 
 export default function Cursor() {
   const { reduced } = useMotion();
@@ -34,7 +34,7 @@ export default function Cursor() {
 
   return (
     <motion.div
-      className="fixed pointer-events-none z-[999]"
+      className="fixed pointer-events-none z-1100"
       style={{ x, y, translateX: "-50%", translateY: "-50%" }}
       aria-hidden
     >

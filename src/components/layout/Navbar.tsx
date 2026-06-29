@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Menu, X, Command } from "lucide-react";
 import { useCommand } from "../providers/CommandProvider";
+import { useMotion } from "../../hooks/useMotion";
 
 const isMac =
   typeof navigator !== "undefined" && /Mac|iPhone|iPad/.test(navigator.platform);
@@ -17,7 +18,10 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { open: openCommand } = useCommand();
+  const { reduced } = useMotion();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     function onScroll() {
@@ -26,6 +30,32 @@ export default function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Scroll-spy: highlight the nav link for whichever section is in view.
+  // Only the home route has these sections; on sub-routes nothing is active.
+  useEffect(() => {
+    if (pathname !== "/") {
+      setActiveSection("");
+      return;
+    }
+    const ids = links.map((l) => l.href.split("#")[1]);
+    const sections = ids
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        }
+      },
+      // A band across the middle of the viewport decides the "current" section.
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 }
+    );
+    sections.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, [pathname]);
 
   useEffect(() => {
     function onResize() {
@@ -60,15 +90,33 @@ export default function Navbar() {
         </AnimatePresence>
 
         <div className="hidden md:flex items-center gap-1">
-          {links.map((link) => (
-            <a
-              key={link.label}
-              href={link.href}
-              className="px-4 py-1.5 rounded-full text-sm text-muted hover:text-ink hover:bg-raise transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {links.map((link) => {
+            const id = link.href.split("#")[1];
+            const active = activeSection === id;
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                aria-current={active ? "true" : undefined}
+                className={`relative px-4 py-1.5 rounded-full text-sm transition-colors ${
+                  active ? "text-ink" : "text-muted hover:text-ink hover:bg-raise"
+                }`}
+              >
+                {active && (
+                  <motion.span
+                    layoutId="nav-active-pill"
+                    className="absolute inset-0 rounded-full bg-accent/15 ring-1 ring-accent/25"
+                    transition={
+                      reduced
+                        ? { duration: 0 }
+                        : { type: "spring", stiffness: 380, damping: 32 }
+                    }
+                  />
+                )}
+                <span className="relative z-10">{link.label}</span>
+              </a>
+            );
+          })}
           {/* Command palette trigger — icon always, shortcut hint in the full bar */}
           <button
             onClick={openCommand}
@@ -119,16 +167,31 @@ export default function Navbar() {
               transition={{ type: "spring", stiffness: 400, damping: 30 }}
               className="fixed top-20 right-4 z-50 w-56 bg-surface border border-edge rounded-2xl p-2 md:hidden"
             >
-              {links.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="flex items-center px-4 py-3 rounded-xl text-sm text-muted hover:text-ink hover:bg-raise transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {links.map((link) => {
+                const id = link.href.split("#")[1];
+                const active = activeSection === id;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    aria-current={active ? "true" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                    className={`flex items-center gap-2.5 px-4 py-3 rounded-xl text-sm transition-colors ${
+                      active
+                        ? "text-ink bg-accent/12"
+                        : "text-muted hover:text-ink hover:bg-raise"
+                    }`}
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                        active ? "bg-accent" : "bg-transparent"
+                      }`}
+                      aria-hidden
+                    />
+                    {link.label}
+                  </a>
+                );
+              })}
               {/* Command palette — works great as a touch navigator too */}
               <button
                 onClick={() => {

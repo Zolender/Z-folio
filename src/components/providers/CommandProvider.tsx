@@ -23,18 +23,32 @@ export function CommandProvider({ children }: { children: ReactNode }) {
   const close = useCallback(() => setIsOpen(false), []);
   const toggle = useCallback(() => setIsOpen((v) => !v), []);
 
-  // Global hotkey: ⌘K (macOS) / Ctrl+K (Windows/Linux) toggles the palette.
-  // Registered once at the app root so it works from anywhere on the page.
+  // Global hotkeys, registered once at the app root so they fire from anywhere:
+  //   ⌘K / Ctrl+K  → toggle the palette (works even while typing)
+  //   /            → open the palette (ignored while typing in a field)
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
         e.preventDefault();
         toggle();
+        return;
+      }
+
+      const target = e.target as HTMLElement | null;
+      const typing =
+        !!target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable);
+
+      if (e.key === "/" && !typing) {
+        e.preventDefault();
+        open();
       }
     }
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [toggle]);
+  }, [toggle, open]);
 
   return (
     <CommandContext.Provider value={{ isOpen, open, close, toggle }}>
