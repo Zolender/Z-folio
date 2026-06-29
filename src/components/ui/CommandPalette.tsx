@@ -243,7 +243,7 @@ export default function CommandPalette() {
             onKeyDown={onKeyDown}
           >
             {/* Search row */}
-            <div className="flex items-center gap-3 px-4 border-b border-white/8">
+            <div className="flex items-center gap-3 px-4 border-b border-line">
               <Search className="w-4 h-4 text-muted shrink-0" />
               <input
                 ref={inputRef}
@@ -290,7 +290,7 @@ export default function CommandPalette() {
                         >
                           {cmd.swatch ? (
                             <span
-                              className="w-4 h-4 rounded-full shrink-0 ring-1 ring-white/15"
+                              className="w-4 h-4 rounded-full shrink-0 ring-1 ring-line"
                               style={{ backgroundColor: cmd.swatch }}
                               aria-hidden
                             />
@@ -311,7 +311,7 @@ export default function CommandPalette() {
             </div>
 
             {/* Footer hints / feedback */}
-            <div className="flex items-center justify-between gap-2 px-4 py-2.5 border-t border-white/8 text-[11px] text-muted">
+            <div className="flex items-center justify-between gap-2 px-4 py-2.5 border-t border-line text-[11px] text-muted">
               {feedback ? (
                 <span className="flex items-center gap-1.5 text-accent" role="status" aria-live="polite">
                   <Check className="w-3 h-3" /> {feedback}

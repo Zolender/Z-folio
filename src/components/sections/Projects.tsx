@@ -49,7 +49,7 @@ export default function Projects() {
         >
           Projects
         </motion.h2>
-        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-10" />
+        <motion.div variants={fadeUp} className="h-px bg-line mb-10" />
       </div>
 
       {/* Desktop / tablet — infinite horizontal carousel */}

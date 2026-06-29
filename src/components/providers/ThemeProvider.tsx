@@ -75,6 +75,15 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     applyTheme(theme);
   }, [theme]);
 
+  // Accent-as-text uses the darker shade in light mode for readable contrast
+  // on light surfaces; the bright accent stays for fills, borders, and glow.
+  useLayoutEffect(() => {
+    document.documentElement.style.setProperty(
+      "--color-accent-text",
+      effectiveMode === "light" ? theme.dim : theme.hex
+    );
+  }, [theme, effectiveMode]);
+
   // Reflect the resolved light/dark mode onto <html data-mode> before paint,
   // and keep it in sync with the OS when the user picks "system".
   useLayoutEffect(() => {

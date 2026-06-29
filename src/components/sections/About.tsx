@@ -27,7 +27,7 @@ export default function About() {
         >
           About
         </motion.h2>
-        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-10" />
+        <motion.div variants={fadeUp} className="h-px bg-line mb-10" />
         <motion.div variants={paragraphStagger} className="flex flex-col gap-6">
           {about.paragraphs.map((p, i) => (
             <motion.p

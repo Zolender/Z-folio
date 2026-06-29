@@ -29,27 +29,8 @@ export default function ProjectPage() {
     );
   }
 
-  const pageVariants = {
-    initial: { opacity: 0, scale: 0.98 },
-    animate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
-    },
-    exit: {
-      opacity: 0,
-      scale: 0.98,
-      transition: { duration: 0.2, ease: "easeIn" as const },
-    },
-  };
-
   return (
-    <motion.div
-      variants={pageVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-    >
+    <>
       <motion.div
         className="fixed top-0 left-0 right-0 h-0.5 bg-accent origin-left z-60"
         style={{ scaleX }}
@@ -58,7 +39,9 @@ export default function ProjectPage() {
       {/* Back + position in series */}
       <div className="flex items-center justify-between mb-12">
         <button
-          onClick={() => navigate("/", { state: { scrollTo: "projects" } })}
+          onClick={() =>
+            navigate("/", { state: { scrollTo: "projects" }, viewTransition: true })
+          }
           className="flex items-center gap-2 text-sm text-muted hover:text-ink transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
@@ -71,14 +54,16 @@ export default function ProjectPage() {
         )}
       </div>
 
-      <motion.div variants={stagger} initial="hidden" animate="visible">
-        <motion.p variants={fadeUp} className="text-xs tracking-widest uppercase text-muted mb-3">
-          {project.name}
-        </motion.p>
-        <motion.h1 variants={fadeUp} className="text-4xl font-semibold tracking-tight text-ink leading-tight mb-8">
-          {project.oneLiner}
-        </motion.h1>
+      {/* Title is the shared element that morphs from the clicked card */}
+      <p className="text-xs tracking-widest uppercase text-muted mb-3">{project.name}</p>
+      <h1
+        style={{ viewTransitionName: "project-hero" }}
+        className="text-4xl font-semibold tracking-tight text-ink leading-tight mb-8"
+      >
+        {project.oneLiner}
+      </h1>
 
+      <motion.div variants={stagger} initial="hidden" animate="visible">
         <motion.div variants={fadeUp} className="flex flex-wrap gap-2 mb-12">
           {project.coreStack.map((tech) => (
             <StackTag key={tech} label={tech} variant="core" />
@@ -142,10 +127,11 @@ export default function ProjectPage() {
 
       {/* Prev / next project navigation */}
       {nav && nav.total > 1 && (
-        <div className="mt-20 pt-8 border-t border-white/8 grid grid-cols-2 gap-4">
+        <div className="mt-20 pt-8 border-t border-line grid grid-cols-2 gap-4">
           <Link
             to={`/projects/${nav.prev.slug}`}
-            className="group flex flex-col gap-1 rounded-2xl border border-white/6 bg-surface/50 p-5 hover:border-accent/40 transition-colors"
+            viewTransition
+            className="group flex flex-col gap-1 rounded-2xl border border-line bg-surface/50 elevate p-5 hover:border-accent/40 transition-colors"
           >
             <span className="flex items-center gap-1.5 text-xs text-muted group-hover:text-accent transition-colors">
               <ArrowLeft className="w-3 h-3" /> Previous
@@ -154,7 +140,8 @@ export default function ProjectPage() {
           </Link>
           <Link
             to={`/projects/${nav.next.slug}`}
-            className="group flex flex-col items-end gap-1 rounded-2xl border border-white/6 bg-surface/50 p-5 text-right hover:border-accent/40 transition-colors"
+            viewTransition
+            className="group flex flex-col items-end gap-1 rounded-2xl border border-line bg-surface/50 elevate p-5 text-right hover:border-accent/40 transition-colors"
           >
             <span className="flex items-center gap-1.5 text-xs text-muted group-hover:text-accent transition-colors">
               Next <ArrowRight className="w-3 h-3" />
@@ -164,6 +151,6 @@ export default function ProjectPage() {
         </div>
       )}
     </div>
-    </motion.div>
+    </>
   );
 }

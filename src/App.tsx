@@ -1,5 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router";
-import { AnimatePresence } from "framer-motion";
+import { BrowserRouter, Routes, Route } from "react-router";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import Cursor from "./components/ui/Cursor";
@@ -10,16 +9,14 @@ import { CommandProvider } from "./components/providers/CommandProvider";
 import Home from "./pages/Home";
 import ProjectPage from "./pages/ProjectPage";
 
-function AnimatedRoutes() {
-  const location = useLocation();
-
+function AppRoutes() {
+  // Route transitions are handled by the native View Transitions API
+  // (see ProjectCard / ProjectPage and global.css), not Framer AnimatePresence.
   return (
-    <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/projects/:slug" element={<ProjectPage />} />
-      </Routes>
-    </AnimatePresence>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/projects/:slug" element={<ProjectPage />} />
+    </Routes>
   );
 }
 
@@ -31,7 +28,7 @@ export default function App() {
           <Cursor />
           <ScrollToTop />
           <Layout>
-            <AnimatedRoutes />
+            <AppRoutes />
           </Layout>
           <CommandPalette />
           <CommandHint />

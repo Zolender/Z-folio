@@ -77,7 +77,7 @@ export default function Contact() {
         >
           {contact.opening}
         </motion.p>
-        <motion.div variants={fadeUp} className="h-px bg-white/8 mb-8" />
+        <motion.div variants={fadeUp} className="h-px bg-line mb-8" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
@@ -89,7 +89,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Name"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-line text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
                 />
               </motion.div>
               <motion.div variants={fadeUp}>
@@ -100,7 +100,7 @@ export default function Contact() {
                   onChange={handleChange}
                   placeholder="Email"
                   required
-                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
+                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-line text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors"
                 />
               </motion.div>
               <motion.div variants={fadeUp}>
@@ -111,7 +111,7 @@ export default function Contact() {
                   placeholder="Message"
                   required
                   rows={5}
-                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-white/6 text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-surface/60 backdrop-blur-sm border border-line text-ink placeholder:text-muted focus:outline-none focus:border-accent/60 transition-colors resize-none"
                 />
               </motion.div>
               <motion.div variants={fadeUp}>
@@ -125,7 +125,7 @@ export default function Contact() {
               </motion.div>
             </motion.div>
             {status === "sent" && (
-              <p className="text-sm text-accent">Message sent.</p>
+              <p className="text-sm text-accent-text">Message sent.</p>
             )}
             {status === "error" && (
               <p className="text-sm text-red-400">

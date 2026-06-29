@@ -39,7 +39,7 @@ export default function Skills() {
         {/* Top rule */}
         <motion.div
           variants={fadeUp}
-          className="h-px bg-white/8 mb-0"
+          className="h-px bg-line mb-0"
         />
 
         {/* Skill groups — definition-list style */}
@@ -48,7 +48,7 @@ export default function Skills() {
             <motion.div
               key={group.category}
               variants={fadeUp}
-              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-3 py-6 border-b border-white/5 last:border-b-0"
+              className="grid grid-cols-1 sm:grid-cols-[180px_1fr] gap-x-10 gap-y-3 py-6 border-b border-line-soft last:border-b-0"
             >
               <p
                 className={`text-sm font-medium mt-0.5 shrink-0 ${
