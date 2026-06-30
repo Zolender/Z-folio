@@ -62,6 +62,25 @@ html[data-mode="light"] {
   animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* Light/dark toggle — the new theme wipes in as an expanding circle from
+   the interaction point (--vt-x/--vt-y set by ThemeProvider). The old
+   snapshot holds still underneath. Scoped to .mode-wipe so route changes
+   keep their crossfade. */
+html.mode-wipe::view-transition-old(root) {
+  animation: none;
+}
+html.mode-wipe::view-transition-new(root) {
+  animation: mode-wipe-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes mode-wipe-in {
+  from {
+    clip-path: circle(0% at var(--vt-x) var(--vt-y));
+  }
+  to {
+    clip-path: circle(150% at var(--vt-x) var(--vt-y));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*),
   ::view-transition-old(*),

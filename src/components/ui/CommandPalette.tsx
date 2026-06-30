@@ -116,10 +116,16 @@ export default function CommandPalette() {
       perform: () => setThemeId(t.id),
     }));
 
+    // Close the palette first, then run the circular wipe a beat later so the
+    // overlay isn't captured in the transition snapshot.
+    const changeMode = (next: "system" | "light" | "dark") => {
+      close();
+      window.setTimeout(() => setMode(next), 180);
+    };
     const appearance: Command[] = [
-      { id: "mode-system", label: "Match system", group: "Appearance", icon: Monitor, keywords: "auto theme mode os default", active: mode === "system", keepOpen: true, perform: () => setMode("system") },
-      { id: "mode-light", label: "Light mode", group: "Appearance", icon: Sun, keywords: "bright day theme mode", active: mode === "light", keepOpen: true, perform: () => setMode("light") },
-      { id: "mode-dark", label: "Dark mode", group: "Appearance", icon: Moon, keywords: "night dark theme mode", active: mode === "dark", keepOpen: true, perform: () => setMode("dark") },
+      { id: "mode-system", label: "Match system", group: "Appearance", icon: Monitor, keywords: "auto theme mode os default", active: mode === "system", keepOpen: true, perform: () => changeMode("system") },
+      { id: "mode-light", label: "Light mode", group: "Appearance", icon: Sun, keywords: "bright day theme mode", active: mode === "light", keepOpen: true, perform: () => changeMode("light") },
+      { id: "mode-dark", label: "Dark mode", group: "Appearance", icon: Moon, keywords: "night dark theme mode", active: mode === "dark", keepOpen: true, perform: () => changeMode("dark") },
     ];
 
     const connect: Command[] = [
