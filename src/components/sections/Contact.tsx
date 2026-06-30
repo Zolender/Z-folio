@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../shared/BrandIcons";
 import SectionWrapper from "../shared/SectionWrapper";
+import MaskedText from "../shared/MaskedText";
 import { useMotion } from "../../hooks/useMotion";
 import { contact } from "../../data/content";
 
@@ -65,12 +66,11 @@ export default function Contact() {
   return (
     <SectionWrapper id="contact" from="right">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.h2
-          variants={fadeUp}
+        <MaskedText
+          as="h2"
+          text="Contact"
           className="text-4xl font-semibold tracking-tight text-ink mb-3"
-        >
-          Contact
-        </motion.h2>
+        />
         <motion.p
           variants={fadeUp}
           className="text-sm text-muted mb-8 max-w-md leading-relaxed"

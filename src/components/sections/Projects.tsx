@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SectionWrapper from "../shared/SectionWrapper";
+import MaskedText from "../shared/MaskedText";
 import ProjectCard from "../project/ProjectCard";
 import { useMotion } from "../../hooks/useMotion";
 import { projects } from "../../data/projects";
@@ -43,12 +44,11 @@ export default function Projects() {
   return (
     <SectionWrapper id="projects" from="right">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.h2
-          variants={fadeUp}
+        <MaskedText
+          as="h2"
+          text="Projects"
           className="text-4xl font-semibold tracking-tight text-ink mb-3"
-        >
-          Projects
-        </motion.h2>
+        />
         <motion.div variants={fadeUp} className="h-px bg-line mb-10" />
       </div>
 

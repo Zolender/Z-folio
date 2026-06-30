@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import SectionWrapper from "../shared/SectionWrapper";
+import MaskedText from "../shared/MaskedText";
 import { useMotion } from "../../hooks/useMotion";
 import { about } from "../../data/content";
 
@@ -21,12 +22,11 @@ export default function About() {
   return (
     <SectionWrapper id="about" from="left">
       <div className="max-w-3xl mx-auto w-full">
-        <motion.h2
-          variants={fadeUp}
+        <MaskedText
+          as="h2"
+          text="About"
           className="text-4xl font-semibold tracking-tight text-ink mb-3"
-        >
-          About
-        </motion.h2>
+        />
         <motion.div variants={fadeUp} className="h-px bg-line mb-10" />
         <motion.div variants={paragraphStagger} className="flex flex-col gap-6">
           {about.paragraphs.map((p, i) => (

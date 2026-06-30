@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import SectionWrapper from "../shared/SectionWrapper";
+import MaskedText from "../shared/MaskedText";
 import StackTag from "../shared/StackTag";
 import { useMotion } from "../../hooks/useMotion";
 import { skillGroups } from "../../data/skills";
@@ -23,12 +24,11 @@ export default function Skills() {
       <div className="max-w-3xl mx-auto w-full">
 
         {/* Heading block */}
-        <motion.h2
-          variants={fadeUp}
+        <MaskedText
+          as="h2"
+          text="Skills"
           className="text-4xl font-semibold tracking-tight text-ink mb-2"
-        >
-          Skills
-        </motion.h2>
+        />
         <motion.p
           variants={fadeUp}
           className="text-sm text-muted mb-8 max-w-xs"

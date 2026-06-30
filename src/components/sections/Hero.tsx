@@ -7,6 +7,7 @@ import {
 } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import SectionWrapper from "../shared/SectionWrapper";
+import MaskedText from "../shared/MaskedText";
 import { useMotion } from "../../hooks/useMotion";
 import { useMagnetic } from "../../hooks/useMagnetic";
 import { hero } from "../../data/content";
@@ -55,6 +56,10 @@ export default function Hero() {
   const scrollY_ = useTransform(scrollY, [0, 600], reduced ? [0, 0] : [0, -120]);
   const scrollOpacity = useTransform(scrollY, [0, 400], reduced ? [1, 1] : [1, 0]);
   const scrollScale = useTransform(scrollY, [0, 600], reduced ? [1, 1] : [1, 0.92]);
+
+  // Scroll-driven counter-rotation for the decorative arcs (subtle parallax)
+  const arcRotate = useTransform(scrollY, [0, 700], reduced ? [0, 0] : [0, 22]);
+  const arcRotateSmall = useTransform(scrollY, [0, 700], reduced ? [0, 0] : [0, -18]);
 
   // Mouse-driven perspective tilt (desktop only)
   const isFine =
@@ -105,9 +110,13 @@ export default function Hero() {
               <p className="text-xs tracking-widest uppercase text-muted mb-6">
                 {hero.tagline}
               </p>
-              <h1 className="text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-tight mb-8">
-                {hero.name}
-              </h1>
+              <MaskedText
+                as="h1"
+                text={hero.name}
+                trigger="mount"
+                delay={0.15}
+                className="text-5xl md:text-6xl font-semibold tracking-tight text-ink leading-tight mb-8"
+              />
               <p className="text-lg text-muted max-w-md leading-relaxed mb-10">
                 {hero.bio}
               </p>
@@ -145,42 +154,54 @@ export default function Hero() {
                   style={{ background: "radial-gradient(ellipse, rgba(139,92,246,0.18) 0%, transparent 70%)" }}
                 />
 
-                {/* Geometric SVG arc — structural frame around the photo */}
-                <svg
+                {/* Geometric SVG arc — structural frame around the photo.
+                    Draws itself on load, then counter-rotates on scroll. */}
+                <motion.svg
                   className="absolute -top-6 -right-6 w-48 h-48 md:w-56 md:h-56 pointer-events-none -z-10"
                   viewBox="0 0 200 200"
                   fill="none"
                   aria-hidden
+                  style={{ rotate: arcRotate, transformOrigin: "center" }}
                 >
                   {/* Large arc — 3/4 circle */}
-                  <circle
+                  <motion.circle
                     cx="100" cy="100" r={ARC_R}
                     stroke="rgba(139,92,246,0.18)"
                     strokeWidth="1"
                     strokeDasharray={`${ARC_CIRC * 0.75} ${ARC_CIRC}`}
-                    strokeDashoffset={ARC_CIRC * 0.125}
                     strokeLinecap="round"
+                    initial={reduced ? false : { strokeDashoffset: ARC_CIRC * 0.875 }}
+                    animate={{ strokeDashoffset: ARC_CIRC * 0.125 }}
+                    transition={{ duration: 1.3, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
                   />
                   {/* Inner accent dot — compass point */}
-                  <circle cx="100" cy="5" r="2" fill="rgba(139,92,246,0.5)" />
-                </svg>
+                  <motion.circle
+                    cx="100" cy="5" r="2" fill="rgba(139,92,246,0.5)"
+                    initial={reduced ? false : { opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 1.5 }}
+                  />
+                </motion.svg>
 
                 {/* Second small arc — bottom-left, counterbalances */}
-                <svg
+                <motion.svg
                   className="absolute -bottom-4 -left-4 w-20 h-20 pointer-events-none -z-10"
                   viewBox="0 0 80 80"
                   fill="none"
                   aria-hidden
+                  style={{ rotate: arcRotateSmall, transformOrigin: "center" }}
                 >
-                  <circle
+                  <motion.circle
                     cx="40" cy="40" r="34"
                     stroke="rgba(139,92,246,0.12)"
                     strokeWidth="1"
                     strokeDasharray="54 214"
-                    strokeDashoffset="-27"
                     strokeLinecap="round"
+                    initial={reduced ? false : { strokeDashoffset: 27 }}
+                    animate={{ strokeDashoffset: -27 }}
+                    transition={{ duration: 1, ease: [0.22, 1, 0.36, 1], delay: 0.7 }}
                   />
-                </svg>
+                </motion.svg>
 
                 {/* Photo card */}
                 <div
