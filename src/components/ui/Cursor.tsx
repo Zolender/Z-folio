@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useSpring } from "framer-motion";
 import { useMotion } from "../../hooks/useMotion";
 
 const INTERACTIVE = "a, button, [role='button'], [role='option'], label, [data-cursor]";
@@ -8,6 +8,7 @@ export default function Cursor() {
   const { reduced } = useMotion();
   const [mounted, setMounted] = useState(false);
   const [hovering, setHovering] = useState(false);
+  const [label, setLabel] = useState<string | null>(null);
 
   const rawX = useMotionValue(-200);
   const rawY = useMotionValue(-200);
@@ -24,6 +25,8 @@ export default function Cursor() {
       rawY.set(e.clientY);
       const el = e.target as Element;
       setHovering(!!el.closest(INTERACTIVE));
+      const labelEl = el.closest("[data-cursor-label]");
+      setLabel(labelEl ? labelEl.getAttribute("data-cursor-label") : null);
     }
 
     window.addEventListener("mousemove", onMove);
@@ -45,13 +48,31 @@ export default function Cursor() {
         animate={{ width: hovering ? 4 : 8, height: hovering ? 4 : 8, opacity: hovering ? 0.4 : 0.85 }}
         transition={{ type: "spring", stiffness: 380, damping: 28 }}
       />
-      {/* Ring — hover state */}
+      {/* Ring — hover state (hidden while a label is shown) */}
       <motion.div
         className="absolute rounded-full border border-accent"
         style={{ top: "50%", left: "50%", translateX: "-50%", translateY: "-50%" }}
-        animate={{ width: hovering ? 30 : 0, height: hovering ? 30 : 0, opacity: hovering ? 0.65 : 0 }}
+        animate={{
+          width: hovering && !label ? 30 : 0,
+          height: hovering && !label ? 30 : 0,
+          opacity: hovering && !label ? 0.65 : 0,
+        }}
         transition={{ type: "spring", stiffness: 300, damping: 26 }}
       />
+      {/* Contextual label pill (e.g. "View" over a project card) */}
+      <AnimatePresence>
+        {label && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.7 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.7 }}
+            transition={{ type: "spring", stiffness: 400, damping: 28 }}
+            className="absolute left-4 top-4 whitespace-nowrap rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold text-on-accent"
+          >
+            {label}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
