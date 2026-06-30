@@ -121,15 +121,16 @@ export default function Navbar() {
             );
           })}
           {/* Command palette trigger — a search affordance with real key caps,
-              so the shortcut is discoverable and OS-correct. */}
-          <button
-            onClick={openCommand}
-            aria-label={`Open command palette (${shortcutKeys.join(" ")})`}
-            title={`Commands & search — ${shortcutKeys.join(" ")}`}
-            className="ml-1 flex items-center gap-2 rounded-full border border-edge pl-3 pr-2 py-1.5 text-sm text-muted hover:text-ink hover:border-accent/40 transition-colors"
-          >
-            <Search className="w-3.5 h-3.5" />
-            {!scrolled && (
+              so the shortcut is discoverable and OS-correct. Only in the full
+              top bar; the shrunk pill stays clean (shortcut still works). */}
+          {!scrolled && (
+            <button
+              onClick={openCommand}
+              aria-label={`Open command palette (${shortcutKeys.join(" ")})`}
+              title={`Commands & search — ${shortcutKeys.join(" ")}`}
+              className="ml-1 flex items-center gap-2 rounded-full border border-edge pl-3 pr-2 py-1.5 text-sm text-muted hover:text-ink hover:border-accent/40 transition-colors"
+            >
+              <Search className="w-3.5 h-3.5" />
               <span className="flex items-center gap-1">
                 {shortcutKeys.map((k) => (
                   <kbd
@@ -140,8 +141,8 @@ export default function Navbar() {
                   </kbd>
                 ))}
               </span>
-            )}
-          </button>
+            </button>
+          )}
         </div>
 
         <button
