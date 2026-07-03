@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router";
+import { Analytics } from "@vercel/analytics/react";
 import Layout from "./components/layout/Layout";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import ErrorBoundary from "./components/layout/ErrorBoundary";
@@ -37,6 +38,7 @@ export default function App() {
           </ErrorBoundary>
           <CommandPalette />
           <CommandHint />
+          <Analytics />
         </CommandProvider>
       </ThemeProvider>
     </BrowserRouter>
