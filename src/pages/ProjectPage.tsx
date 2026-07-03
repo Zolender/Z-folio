@@ -5,6 +5,7 @@ import { getProjectBySlug, getProjectNavigation } from "../data/projects";
 import StackTag from "../components/shared/StackTag";
 import { GithubIcon } from "../components/shared/BrandIcons";
 import { useMotion } from "../hooks/useMotion";
+import { useDocumentTitle } from "../hooks/useDocumentTitle";
 
 export default function ProjectPage() {
   const { slug } = useParams<{ slug: string }>();
@@ -14,6 +15,8 @@ export default function ProjectPage() {
   const { fadeUp, stagger } = useMotion();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, restDelta: 0.001 });
+
+  useDocumentTitle(project?.name);
 
   if (!project) {
     return (
