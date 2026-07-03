@@ -4,6 +4,22 @@ import { Resend } from "resend";
 const resend = new Resend(process.env.RESEND_API_KEY);
 const FROM = process.env.FROM_EMAIL ?? "onboarding@resend.dev";
 const TO = "ndeingare@gmail.com";
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "https://zolender.xyz";
+
+// Best-effort rate limit. Serverless instances are ephemeral and not shared,
+// so this only throttles bursts hitting the same warm instance — a cheap first
+// line of defence, not a guarantee. Pair it with the honeypot below.
+const RATE_LIMIT = 5; // requests
+const RATE_WINDOW_MS = 60_000; // per minute per IP
+const hits = new Map<string, number[]>();
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const recent = (hits.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  recent.push(now);
+  hits.set(ip, recent);
+  return recent.length > RATE_LIMIT;
+}
 
 //  Escape HTML special characters to prevent injection in the email body
 function esc(str: string) {
@@ -15,14 +31,28 @@ function esc(str: string) {
 }
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+  res.setHeader("Vary", "Origin");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
   if (req.method === "OPTIONS") return res.status(200).end();
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
 
-  const { name, email, message } = req.body ?? {};
+  const ip =
+    (req.headers["x-forwarded-for"] as string | undefined)?.split(",")[0]?.trim() ??
+    "unknown";
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ error: "Too many requests. Try again shortly." });
+  }
+
+  const { name, email, message, company } = req.body ?? {};
+
+  // Honeypot: real users never see or fill the "company" field, so any value
+  // means a bot. Return a fake success so it doesn't retry or probe.
+  if (company) {
+    return res.status(200).json({ ok: true });
+  }
 
   if (!name || !email || !message) {
     return res.status(400).json({ error: "Missing required fields" });

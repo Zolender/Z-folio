@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
 import { Mail } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "../shared/BrandIcons";
@@ -19,6 +19,9 @@ export default function Contact() {
   const { reduced, fadeUp } = useMotion();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  // Honeypot: read at submit so DOM-level bot fills are caught even when they
+  // bypass React's onChange.
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const fieldStagger = {
     hidden: {},
@@ -53,7 +56,7 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
       });
       if (!res.ok) throw new Error();
       setStatus("sent");
@@ -81,6 +84,16 @@ export default function Contact() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            {/* Honeypot — hidden from users and assistive tech; bots fill it. */}
+            <input
+              ref={honeypotRef}
+              type="text"
+              name="company"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute left-[-9999px] h-px w-px opacity-0"
+            />
             <motion.div variants={fieldStagger} className="flex flex-col gap-4">
               <motion.div variants={fadeUp}>
                 <label htmlFor="contact-name" className="sr-only">
