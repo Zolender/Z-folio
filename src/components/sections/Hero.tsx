@@ -12,6 +12,11 @@ import { useMotion } from "../../hooks/useMotion";
 import { useMagnetic } from "../../hooks/useMagnetic";
 import { hero } from "../../data/content";
 
+// Pointer capability is fixed for the session — compute once at module load
+// rather than on every render (matches ProjectCard / CommandHint).
+const hasFinePointer =
+  typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
+
 function MagneticLink({
   href,
   className,
@@ -24,8 +29,6 @@ function MagneticLink({
   reduced: boolean | null;
 }) {
   const { ref, x, y, onMouseMove, onMouseLeave } = useMagnetic(0.32);
-  const hasFinePointer =
-    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
 
   if (reduced || !hasFinePointer) {
     return <a href={href} className={className}>{children}</a>;
@@ -62,9 +65,6 @@ export default function Hero() {
   const arcRotateSmall = useTransform(scrollY, [0, 700], reduced ? [0, 0] : [0, -18]);
 
   // Mouse-driven perspective tilt (desktop only)
-  const isFine =
-    typeof window !== "undefined" && window.matchMedia("(pointer: fine)").matches;
-
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-2.5, 2.5]), {
@@ -77,7 +77,7 @@ export default function Hero() {
   });
 
   function onMouseMove(e: React.MouseEvent<HTMLDivElement>) {
-    if (reduced || !isFine) return;
+    if (reduced || !hasFinePointer) return;
     const rect = e.currentTarget.getBoundingClientRect();
     mx.set((e.clientX - rect.left) / rect.width - 0.5);
     my.set((e.clientY - rect.top) / rect.height - 0.5);

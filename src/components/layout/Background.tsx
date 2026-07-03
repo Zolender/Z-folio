@@ -35,8 +35,19 @@ export default function Background() {
 
     let W = window.innerWidth;
     let H = window.innerHeight;
-    canvas.width = W;
-    canvas.height = H;
+
+    // Scale the backing store by devicePixelRatio (capped at 2 to bound cost on
+    // 3x phones) so the dot grid stays crisp; the context is scaled to match, so
+    // all drawing below keeps using CSS-pixel coordinates.
+    function sizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      canvas.style.width = `${W}px`;
+      canvas.style.height = `${H}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    sizeCanvas();
 
     const mouse = { x: -9999, y: -9999, active: false };
     const ripples: Ripple[] = [];
@@ -151,8 +162,7 @@ export default function Background() {
         if (newW === W && newH < H * 0.8) return;
         W = newW;
         H = newH;
-        canvas.width = W;
-        canvas.height = H;
+        sizeCanvas();
         dots = buildDots();
       }, 150);
     }
