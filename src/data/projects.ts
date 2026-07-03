@@ -25,10 +25,10 @@ export const projects: Project[] = [
       github: "https://github.com/Zolender/MovieApp",
     },
     screenshots: [
-      "/screenshots/cinesearch/cinesearch-landing.png",
-      "/screenshots/cinesearch/SearchResult.png",
-      "/screenshots/cinesearch/cineSearch-movieDetails.png",
-      "/screenshots/cinesearch/cineSearch-favorites.png",
+      { src: "/screenshots/cinesearch/cinesearch-landing.webp", width: 1016, height: 480 },
+      { src: "/screenshots/cinesearch/SearchResult.webp", width: 1024, height: 480 },
+      { src: "/screenshots/cinesearch/cineSearch-movieDetails.webp", width: 1050, height: 480 },
+      { src: "/screenshots/cinesearch/cineSearch-favorites.webp", width: 1056, height: 480 },
     ],
   },
   {
@@ -88,9 +88,9 @@ export const projects: Project[] = [
       github: "https://github.com/Zolender/Agri-hub",
     },
     screenshots: [
-      "/screenshots/agrihub/agrihub-dashboard.png",
-      "/screenshots/agrihub/agrihub-transactions.png",
-      "/screenshots/agrihub/agrihub-importData.png",
+      { src: "/screenshots/agrihub/agrihub-dashboard.webp", width: 1028, height: 480 },
+      { src: "/screenshots/agrihub/agrihub-transactions.webp", width: 1020, height: 480 },
+      { src: "/screenshots/agrihub/agrihub-importData.webp", width: 1030, height: 480 },
     ],
   },
   {

@@ -80,12 +80,16 @@ export default function ProjectPage() {
 
         {project.screenshots.length > 0 && (
           <motion.div variants={fadeUp} className="flex gap-4 overflow-x-auto scrollbar-hide pb-2 mb-12">
-            {project.screenshots.map((src, i) => (
+            {project.screenshots.map((shot, i) => (
               <img
                 key={i}
-                src={src}
+                src={shot.src}
+                width={shot.width}
+                height={shot.height}
+                loading="lazy"
+                decoding="async"
                 alt={`${project.name} screenshot ${i + 1}`}
-                className="h-48 rounded-xl object-cover shrink-0"
+                className="h-48 w-auto rounded-xl object-cover shrink-0"
               />
             ))}
           </motion.div>

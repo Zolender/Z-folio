@@ -211,6 +211,8 @@ export default function Hero() {
                   <img
                     src="/me.jpg"
                     alt="Eben-Ezer Ndeingar"
+                    width={992}
+                    height={1000}
                     className="w-full h-full object-cover object-top"
                   />
                   {/* Diagonal shine on hover */}

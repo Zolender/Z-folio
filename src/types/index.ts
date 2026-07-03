@@ -1,3 +1,9 @@
+export interface Screenshot {
+  src: string;
+  width: number;
+  height: number;
+}
+
 export interface Project {
   name: string;
   slug: string;
@@ -10,5 +16,5 @@ export interface Project {
     live: string;
     github: string;
   };
-  screenshots: string[];
+  screenshots: Screenshot[];
 }
