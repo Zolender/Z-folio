@@ -83,7 +83,11 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <motion.div variants={fieldStagger} className="flex flex-col gap-4">
               <motion.div variants={fadeUp}>
+                <label htmlFor="contact-name" className="sr-only">
+                  Name
+                </label>
                 <input
+                  id="contact-name"
                   name="name"
                   value={form.name}
                   onChange={handleChange}
@@ -93,7 +97,11 @@ export default function Contact() {
                 />
               </motion.div>
               <motion.div variants={fadeUp}>
+                <label htmlFor="contact-email" className="sr-only">
+                  Email
+                </label>
                 <input
+                  id="contact-email"
                   name="email"
                   type="email"
                   value={form.email}
@@ -104,7 +112,11 @@ export default function Contact() {
                 />
               </motion.div>
               <motion.div variants={fadeUp}>
+                <label htmlFor="contact-message" className="sr-only">
+                  Message
+                </label>
                 <textarea
+                  id="contact-message"
                   name="message"
                   value={form.message}
                   onChange={handleChange}
@@ -124,14 +136,16 @@ export default function Contact() {
                 </button>
               </motion.div>
             </motion.div>
-            {status === "sent" && (
-              <p className="text-sm text-accent-text">Message sent.</p>
-            )}
-            {status === "error" && (
-              <p className="text-sm text-red-400">
-                Something went wrong. Try emailing directly.
-              </p>
-            )}
+            <div role="status" aria-live="polite">
+              {status === "sent" && (
+                <p className="text-sm text-accent-text">Message sent.</p>
+              )}
+              {status === "error" && (
+                <p className="text-sm text-red-400">
+                  Something went wrong. Try emailing directly.
+                </p>
+              )}
+            </div>
           </form>
 
           <motion.div
