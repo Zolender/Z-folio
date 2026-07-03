@@ -46,7 +46,7 @@
 
 **Links:**
 
-- Live: https://movie-app-two-pi-45.vercel.app
+- Live: https://z-moviies.vercel.app
 - GitHub: https://github.com/Zolender/MovieApp
 
 ---
